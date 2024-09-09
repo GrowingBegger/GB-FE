@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Color } from "../styles/Color";
 import { LoginInput } from "../Components/LoginInput";
+import Button from "../Components/Common/Button";
 
 export const LoginPage = () => {
   return (
@@ -17,8 +18,8 @@ export const LoginPage = () => {
           isPassword
         />
       </Wrapper>
+      <Button content="로그인" />
       <Wrapper>
-        <Button>로그인</Button>
         <Signin>
           아직 회원이 아니신가요?&ensp;<p>회원가입 하기</p>
         </Signin>
@@ -56,11 +57,6 @@ const Title = styled.p`
 const Content = styled.p`
   font-family: Pretendard-Light;
   font-size: 15px;
-`;
-
-const Button = styled.button`
-  width: 360px;
-  height: 50px;
 `;
 
 const Signin = styled.p`
