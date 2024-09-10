@@ -6,14 +6,14 @@ export const PayNotification = () => {
     return (
         <PayNotificationWrapper>
             <p className="BoldText">요아정</p>
-            <div className="Texts">
+            <Texts>
                 <p>에</p>
                 <p className="BoldText">20,000원</p>
-            </div>
-            <div className="Icon">
+            </Texts>
+            <Icons>
                 <p>을 지출했어요</p>
                 <img src={CoinIcon} alt="코인" />
-            </div>
+            </Icons>
         </PayNotificationWrapper>
     );
 };
@@ -30,16 +30,18 @@ const PayNotificationWrapper = styled.div`
     color: white;
     font-size: 15px;
     font-family: Pretendard-Medium;
-    > .Texts {
-        display: flex;
-        gap: 5px;
-    }
-    > .Icon {
-        display: flex;
-        gap: 9px;
-        align-items: center;
-    }
     > .BoldText {
         font-family: Pretendard-Bold;
     }
+`;
+
+const Texts = styled.div`
+    display: flex;
+    gap: 5px;
+`;
+
+const Icons = styled.div`
+    display: flex;
+    gap: 9px;
+    align-items: center;
 `;
