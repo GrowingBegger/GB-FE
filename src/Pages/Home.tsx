@@ -8,13 +8,13 @@ export const Home = () => {
     return (
         <Wrapper>
             <HeaderWrapper>
-                <img className="logo" src={Logo} alt="로고" />
-                <img className="profile" src={ProfileIcon} alt="프로필" />
+                <img src={Logo} alt="로고" />
+                <img src={ProfileIcon} alt="프로필" />
             </HeaderWrapper>
-            <button>
+            <BoardButton>
                 게시글 작성하러 가기
                 <img src={RightIcon} alt="" />
-            </button>
+            </BoardButton>
             <BoardWrapper>
                 <Board />
                 <Board />
@@ -30,22 +30,23 @@ const Wrapper = styled.div`
     flex-direction: column;
     padding: 50px 25px;
     align-items: center;
-    > button {
-        width: 380px;
-        height: 50px;
-        background-color: white;
-        font-family: Pretendard-Medium;
-        font-size: 16px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        margin-top: 19px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 30px;
-        gap: 196px;
-        filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.1));
-    }
+`;
+
+const BoardButton = styled.button`
+    width: 380px;
+    height: 50px;
+    background-color: white;
+    font-family: Pretendard-Medium;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 196px;
+    filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.1));
 `;
 
 const HeaderWrapper = styled.div`

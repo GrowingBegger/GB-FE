@@ -10,11 +10,11 @@ export const Board = () => {
         <BoardWrapper>
             <HeaderWrapper>
                 <ProfileWrapper>
-                    <img src={ProfileIcon} alt="프로필" />
-                    <div>
-                        <Name className="name">의진</Name>
-                        <Date className="date">2024년 9월 10일</Date>
-                    </div>
+                    <ProfileImg src={ProfileIcon} alt="프로필" />
+                    <ProfileBox>
+                        <Name>의진</Name>
+                        <Date>2024년 9월 10일</Date>
+                    </ProfileBox>
                 </ProfileWrapper>
                 <IconWrapper>
                     <img src={DeleteIcon} alt="삭제" />
@@ -22,8 +22,8 @@ export const Board = () => {
                 </IconWrapper>
             </HeaderWrapper>
             <PayNotification />
-            <img src={TestImg} alt="테스트 이미지" />
-            <p>아니 근데 이게 어쩔 수가 없어요.. 맛있는걸 어떡해요 😭 진짜 그만 써야하는뎁... ㅠ.ㅠ</p>
+            <Img src={TestImg} alt="테스트 이미지" />
+            <Content>아니 근데 이게 어쩔 수가 없어요.. 맛있는걸 어떡해요 😭 진짜 그만 써야하는뎁... ㅠ.ㅠ</Content>
         </BoardWrapper>
     );
 };
@@ -39,13 +39,15 @@ const BoardWrapper = styled.div`
     gap: 15px;
     padding: 15px;
     filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.1));
-    > img {
-        border-radius: 5px;
-    }
-    > p {
-        font-family: Pretendard-Medium;
-        font-size: 15px;
-    }
+`;
+
+const Img = styled.img`
+    border-radius: 5px;
+`;
+
+const Content = styled.p`
+    font-family: Pretendard-Medium;
+    font-size: 15px;
 `;
 
 const HeaderWrapper = styled.div`
@@ -57,15 +59,17 @@ const ProfileWrapper = styled.div`
     align-items: center;
     margin-right: auto;
     gap: 10px;
-    > img {
-        width: 41px;
-        height: 41px;
-    }
-    > div {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-    }
+`;
+
+const ProfileBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+`;
+
+const ProfileImg = styled.img`
+    width: 41px;
+    height: 41px;
 `;
 
 const Name = styled.p`

@@ -5,10 +5,10 @@ import CoinIcon from "../../Assets/img/SVG/coinIcon.svg";
 export const PayNotification = () => {
     return (
         <PayNotificationWrapper>
-            <p className="BoldText">요아정</p>
+            <BoldText>요아정</BoldText>
             <Texts>
                 <p>에</p>
-                <p className="BoldText">20,000원</p>
+                <BoldText>20,000원</BoldText>
             </Texts>
             <Icons>
                 <p>을 지출했어요</p>
@@ -30,9 +30,10 @@ const PayNotificationWrapper = styled.div`
     color: white;
     font-size: 15px;
     font-family: Pretendard-Medium;
-    > .BoldText {
-        font-family: Pretendard-Bold;
-    }
+`;
+
+const BoldText = styled.p`
+    font-family: Pretendard-Bold;
 `;
 
 const Texts = styled.div`
