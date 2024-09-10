@@ -12,8 +12,8 @@ export const Board = () => {
                 <ProfileWrapper>
                     <img src={ProfileIcon} alt="프로필" />
                     <div>
-                        <p className="name">의진</p>
-                        <p className="date">2024년 9월 10일</p>
+                        <Name className="name">의진</Name>
+                        <Date className="date">2024년 9월 10일</Date>
                     </div>
                 </ProfileWrapper>
                 <IconWrapper>
@@ -65,16 +65,18 @@ const ProfileWrapper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 3px;
-        > .name {
-            font-family: Pretendard-Medium;
-            font-size: 15px;
-        }
-        > .date {
-            font-family: Pretendard-Light;
-            color: rgba(0, 0, 0, 0.43);
-            font-size: 12px;
-        }
     }
+`;
+
+const Name = styled.p`
+    font-family: Pretendard-Medium;
+    font-size: 15px;
+`;
+
+const Date = styled.p`
+    font-family: Pretendard-Light;
+    color: rgba(0, 0, 0, 0.43);
+    font-size: 12px;
 `;
 
 const IconWrapper = styled.div`
