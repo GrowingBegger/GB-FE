@@ -4,6 +4,7 @@ import DeleteIcon from "../..//Assets/img/SVG/deleteIcon.svg";
 import EditIcon from "../../Assets/img/SVG/editIcon.svg";
 import { PayNotification } from "./PayNotification";
 import TestImg from "../../Assets/img/SVG/testImg.svg";
+import { Link } from "react-router-dom";
 
 export const Board = () => {
     return (
@@ -22,8 +23,12 @@ export const Board = () => {
                 </IconWrapper>
             </HeaderWrapper>
             <PayNotification />
-            <Img src={TestImg} alt="테스트 이미지" />
-            <Content>아니 근데 이게 어쩔 수가 없어요.. 맛있는걸 어떡해요 😭 진짜 그만 써야하는뎁... ㅠ.ㅠ</Content>
+            <Link to={"/board/detail"}>
+                <Img src={TestImg} alt="테스트 이미지" />
+            </Link>
+            <Link to={"/board/detail"}>
+                <Content>아니 근데 이게 어쩔 수가 없어요.. 맛있는걸 어떡해요 😭 진짜 그만 써야하는뎁... ㅠ.ㅠ</Content>
+            </Link>
         </BoardWrapper>
     );
 };
