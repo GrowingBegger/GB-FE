@@ -4,6 +4,7 @@ interface ButtonProps {
     backgroundColor?: "orange" | "gray" | "white";
     borderColor?: string;
     textColor?: string;
+    fontFamilly?: string;
     onClick?: () => void;
     disabled?: boolean;
     content?: string;
@@ -15,6 +16,7 @@ const Button: React.FC<ButtonProps> = ({
     size = "normal",
     backgroundColor = "orange",
     borderColor,
+    fontFamilly = "Pretendard-Medium",
     textColor = "white",
     onClick,
     disabled = false,
@@ -59,6 +61,7 @@ const Button: React.FC<ButtonProps> = ({
         height: `${height}px`,
         backgroundColor: bgColor,
         display: "flex",
+        fontFamily: "Pretendard-Medium",
         justifyContent: "center",
         alignItems: "center",
         fontSize: `${fontSize}px`,
