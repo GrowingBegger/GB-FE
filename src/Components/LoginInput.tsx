@@ -10,6 +10,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   onChange?: (e: any) => void;
   isPassword?: boolean;
+  isUnit?: boolean;
 }
 
 export const LoginInput: React.FC<InputProps> = ({
@@ -18,6 +19,7 @@ export const LoginInput: React.FC<InputProps> = ({
   value,
   onChange,
   isPassword = false,
+  isUnit = false,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +35,7 @@ export const LoginInput: React.FC<InputProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        isUnit={isUnit}
         {...props}
       />
       {isPassword && (
@@ -41,6 +44,7 @@ export const LoginInput: React.FC<InputProps> = ({
           onClick={handleTogglePassword}
         />
       )}
+      {isUnit && <Unit>원</Unit>}
     </InputWrapper>
   );
 };
@@ -51,12 +55,13 @@ const InputWrapper = styled.div`
   height: 45px;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ isUnit?: boolean }>`
   width: 100%;
   height: 100%;
   font-family: Pretendard-Light;
   font-size: 15px;
   padding: 0 15px;
+  padding-right: ${({ isUnit }) => (isUnit ? "40px" : "15px")}; /* 공간 확보 */
   border: 1px solid ${Color.color1};
   border-radius: 5px;
   :focus {
@@ -72,4 +77,15 @@ const EyeIcon = styled.img`
   top: 55%;
   transform: translateY(-50%);
   cursor: pointer;
+`;
+
+const Unit = styled.p`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-family: Pretendard-Light;
+  font-size: 15px;
+  color: #888888;
 `;
