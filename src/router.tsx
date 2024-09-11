@@ -17,5 +17,6 @@ function router() {
             </Routes>
         </BrowserRouter>
     );
+}
 
 export default router;
