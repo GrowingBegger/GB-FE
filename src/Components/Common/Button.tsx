@@ -1,7 +1,9 @@
+import { Color } from "../../styles/Color";
+
 interface ButtonProps {
     to?: string;
     size?: "small" | "normal";
-    backgroundColor?: string;
+    backgroundColor?: "orange" | "gray";
     borderColor?: string;
     textColor?: string;
     onClick?: () => void;
@@ -13,7 +15,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
     to,
     size = "normal",
-    backgroundColor = "#FF802C",
+    backgroundColor = "orange",
     borderColor,
     textColor = "white",
     onClick,
@@ -31,10 +33,30 @@ const Button: React.FC<ButtonProps> = ({
     };
     const { width, height, fontSize } = getSize(size);
 
+    const getColor = (backgroundColor: "orange" | "gray", textColor: string) => {
+        let background, color;
+
+        switch (backgroundColor) {
+            case "orange":
+                background = "#FF802C";
+                break;
+            case "gray":
+                background = "#CDCDCD";
+                break;
+            default:
+                background = backgroundColor;
+        }
+
+        color = textColor || "white";
+
+        return { backgroundColor: background, color };
+    };
+    const { backgroundColor: bgColor, color } = getColor(backgroundColor, textColor);
+
     const defaultButtonStyle: React.CSSProperties = {
         width: `${width}px`,
         height: `${height}px`,
-        backgroundColor: disabled ? "#CDCDCD" : backgroundColor,
+        backgroundColor: bgColor,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
