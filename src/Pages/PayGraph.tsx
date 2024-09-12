@@ -2,11 +2,14 @@ import styled from "styled-components";
 import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
 import { Color } from "../styles/Color";
 import { Graph } from "../Components/MyPage/Graph";
+import { Link } from "react-router-dom";
 
 export const PayGraph = () => {
     return (
         <Wrapper>
-            <BackButton src={LeftIcon} alt="뒤로가기" />
+            <BackButtonLink to={"/mypage"}>
+                <BackButton src={LeftIcon} alt="뒤로가기" />
+            </BackButtonLink>
             <Title>
                 <p style={{ fontFamily: "Pretendard-SemiBold", fontSize: "23px" }}>지출 그래프</p>
                 <Explain>그래프로 지출을 체계적으로 관리하세요</Explain>
@@ -76,10 +79,14 @@ const Wrapper = styled.div`
     padding: 75px 27px;
 `;
 
+const BackButtonLink = styled(Link)`
+    display: flex;
+    align-self: flex-start;
+`;
+
 const BackButton = styled.img`
     width: 2vw;
     margin-bottom: 31px;
-    align-self: flex-start;
 `;
 
 const Title = styled.div`
