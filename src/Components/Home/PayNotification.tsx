@@ -20,7 +20,7 @@ export const PayNotification = () => {
 
 const PayNotificationWrapper = styled.div`
     display: flex;
-    width: 350px;
+    width: 100%;
     height: 41px;
     background-color: ${Color.color2};
     border-radius: 30px;

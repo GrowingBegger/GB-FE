@@ -26,9 +26,9 @@ const Button: React.FC<ButtonProps> = ({
     const getSize = (size: "small" | "normal") => {
         switch (size) {
             case "small":
-                return { width: 143, height: 37, fontSize: 14 };
+                return { width: "143px", height: 37, fontSize: 14 };
             case "normal":
-                return { width: 360, height: 50, fontSize: 17 };
+                return { width: "85vw", height: 50, fontSize: 17 };
         }
     };
     const { width, height, fontSize } = getSize(size);
@@ -57,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({
     const { backgroundColor: bgColor, color } = getColor(backgroundColor, textColor);
 
     const defaultButtonStyle: React.CSSProperties = {
-        width: `${width}px`,
+        width: width,
         height: `${height}px`,
         backgroundColor: bgColor,
         display: "flex",

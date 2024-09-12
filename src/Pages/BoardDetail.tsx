@@ -17,21 +17,21 @@ export const BoardDetail = () => {
                         <p style={{ fontFamily: "Pretendard-Regular", fontSize: "13px" }}>뒤로가기</p>
                     </BackButtonWrapper>
                 </Link>
-                <Board />
-                <ReactionBox />
-                <Line />
-                <CommentTitle>댓글</CommentTitle>
-                <CommentWrapper>
-                    <CommentBox />
-                    <CommentBox />
-                    <CommentBox />
-                    <CommentBox />
-                </CommentWrapper>
-                <CommentInputWrapper>
-                    <CommentInput placeholder="댓글을 입력해주세요"></CommentInput>
-                    <img src={SendIcon} alt="보내기" />
-                </CommentInputWrapper>
             </Wrap>
+            <Board />
+            <ReactionBox />
+            <Line />
+            <CommentTitle>댓글</CommentTitle>
+            <CommentWrapper>
+                <CommentBox />
+                <CommentBox />
+                <CommentBox />
+                <CommentBox />
+            </CommentWrapper>
+            <CommentInputWrapper>
+                <CommentInput placeholder="댓글을 입력해주세요"></CommentInput>
+                <img src={SendIcon} alt="보내기" />
+            </CommentInputWrapper>
         </Wrapper>
     );
 };
@@ -41,12 +41,13 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 25px;
 `;
 
 const Wrap = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-self: flex-start;
 `;
 
 const BackButtonWrapper = styled.div`
@@ -58,7 +59,7 @@ const BackButtonWrapper = styled.div`
 `;
 
 const Line = styled.div`
-    width: 380px;
+    width: 100%;
     height: 3px;
     border-radius: 30px;
     background-color: ${Color.color1};
@@ -70,6 +71,7 @@ const CommentTitle = styled.p`
     font-family: Pretendard-SemiBold;
     font-size: 15px;
     margin-bottom: 15px;
+    align-self: flex-start;
 `;
 
 const CommentWrapper = styled.div`
@@ -77,17 +79,19 @@ const CommentWrapper = styled.div`
     flex-direction: column;
     gap: 15px;
     margin-bottom: 30px;
+    width: 100%;
 `;
 
 const CommentInputWrapper = styled.div`
     display: flex;
-    gap: 20px;
+    gap: 10px;
+    width: 100%;
     align-items: center;
     margin-bottom: 30px;
 `;
 
 const CommentInput = styled.input`
-    width: 335px;
+    width: 100%;
     height: 40px;
     border: 1px solid #cdcdcd;
     border-radius: 5px;
