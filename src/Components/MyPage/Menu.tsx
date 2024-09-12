@@ -96,7 +96,7 @@ const MenuWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 17px;
-    width: 360px;
+    width: 100%;
 `;
 
 const MenuBox = styled.div`

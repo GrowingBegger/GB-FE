@@ -25,7 +25,7 @@ export const Board = () => {
 
     return (
         <>
-            <BoardWrapper>
+            <BoardContainer>
                 <HeaderWrapper>
                     <ProfileWrapper>
                         <ProfileImg src={ProfileIcon} alt="프로필" />
@@ -48,7 +48,8 @@ export const Board = () => {
                         아니 근데 이게 어쩔 수가 없어요.. 맛있는걸 어떡해요 😭 진짜 그만 써야하는뎁... ㅠ.ㅠ
                     </Content>
                 </Link>
-            </BoardWrapper>
+            </BoardContainer>
+
             {isModalOpen && (
                 <Modal
                     titleText={{ before: "게시물을", after: "하시겠습니까?" }}
@@ -62,8 +63,8 @@ export const Board = () => {
     );
 };
 
-const BoardWrapper = styled.div`
-    width: 380px;
+const BoardContainer = styled.div`
+    width: 100%;
     height: 401px;
     display: flex;
     flex-direction: column;
@@ -77,6 +78,8 @@ const BoardWrapper = styled.div`
 
 const Img = styled.img`
     border-radius: 5px;
+    width: 100%;
+    height: 200px;
 `;
 
 const Content = styled.p`

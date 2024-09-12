@@ -46,7 +46,7 @@ export const Graph = () => {
 
     return (
         <GraphWrapper>
-            <ReactApexChart options={options} series={series} type="area" height={224} width={360} />
+            <ReactApexChart options={options} series={series} type="area" height={224} width="100%" />
         </GraphWrapper>
     );
 };
@@ -54,4 +54,5 @@ export const Graph = () => {
 const GraphWrapper = styled.div`
     border-radius: 5px;
     overflow: hidden;
+    width: 85vw;
 `;

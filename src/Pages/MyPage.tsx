@@ -5,8 +5,6 @@ import { Color } from "../styles/Color";
 import { Menu } from "../Components/MyPage/Menu";
 import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
 import { Link } from "react-router-dom";
-import { Modal } from "../Components/Common/Modal";
-import { useState } from "react";
 
 export const MyPage = () => {
     return (
@@ -40,7 +38,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 46px;
+    padding: 46px 35px;
 `;
 
 const HeaderWrapper = styled.div`
@@ -52,7 +50,7 @@ const HeaderWrapper = styled.div`
 
 const BackButtton = styled.img`
     position: absolute;
-    left: 35px;
+    left: 0px;
     top: 50%;
     transform: translateY(-50%);
 `;
@@ -89,6 +87,7 @@ const Level = styled.div`
 const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 30px;
 `;
 
@@ -98,7 +97,7 @@ const TargetMoney = styled.div`
     justify-content: center;
     background-color: ${Color.white};
     border: 1px solid ${Color.color2};
-    width: 360px;
+    width: 100%;
     height: 50px;
     border-radius: 30px;
     font-family: Pretendard-Medium;
@@ -109,7 +108,7 @@ const TargetMoney = styled.div`
 `;
 
 const Line = styled.div`
-    width: 360px;
+    width: 100%;
     height: 4px;
     border-radius: 30px;
     background-color: ${Color.color2};

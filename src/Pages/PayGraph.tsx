@@ -76,7 +76,8 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin-left: auto;
-    padding: 75px 27px;
+    padding: 50px 35px;
+    width: 100%;
 `;
 
 const BackButtonLink = styled(Link)`
@@ -85,8 +86,8 @@ const BackButtonLink = styled(Link)`
 `;
 
 const BackButton = styled.img`
-    width: 2vw;
-    margin-bottom: 31px;
+    display: flex;
+    width: 100%;
 `;
 
 const Title = styled.div`
@@ -94,6 +95,7 @@ const Title = styled.div`
     flex-direction: column;
     gap: 7px;
     align-self: flex-start;
+    margin-top: 75px;
 `;
 
 const Explain = styled.p`
@@ -109,14 +111,15 @@ const GraphBox = styled.div`
 const PayDataWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
-    width: 340px;
     margin-top: 25px;
 `;
 
 const PayData = styled.div`
     display: flex;
     align-items: center;
+    width: 85vw;
 `;
 
 const Month = styled.p`

@@ -34,8 +34,8 @@ export const MyInfoEdit = () => {
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 75px;
     align-items: center;
+    padding: 50px 35px;
     justify-content: center;
     width: 100%;
 `;
@@ -44,12 +44,12 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 360px;
+    width: 100%;
 `;
 
 const BackButton = styled.img`
     display: flex;
-    align-self: flex-start;
+    width: 100%;
 `;
 
 const TitleWrapper = styled.div`
@@ -76,6 +76,9 @@ const InputWrapper = styled.div`
     flex-direction: column;
     gap: 15px;
     margin-top: 90px;
+    padding-left: 35px;
+    padding-right: 35px;
+    align-items: center;
 `;
 
 const ButtonWrapper = styled.div`
