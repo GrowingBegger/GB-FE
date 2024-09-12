@@ -4,6 +4,7 @@ import EditIcon from "../Assets/img/SVG/editIcon.svg";
 import { Color } from "../styles/Color";
 import { Menu } from "../Components/MyPage/Menu";
 import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
+import { Link } from "react-router-dom";
 
 export const MyPage = () => {
     return (
@@ -14,7 +15,9 @@ export const MyPage = () => {
             </HeaderWrapper>
             <NameWrapper>
                 <p style={{ fontFamily: "Pretendard-SemiBold", fontSize: "17px" }}>의진</p>
-                <EditImg src={EditIcon} alt="" />
+                <Link to={"/mypage/edit"}>
+                    <EditImg src={EditIcon} alt="수정하기" />
+                </Link>
             </NameWrapper>
             <Level>Lv.5</Level>
             <ContentWrapper>

@@ -7,6 +7,7 @@ import { OnboardingPage } from "./Pages/OnBoarding";
 import { BoardDetail } from "./Pages/BoardDetail";
 import { PayGraph } from "./Pages/PayGraph";
 import { MyPage } from "./Pages/MyPage";
+import { MyInfoEdit } from "./Pages/MyInfoEdit";
 
 function router() {
     return (
@@ -20,6 +21,7 @@ function router() {
                 <Route path="/board/detail" element={<BoardDetail />} />
                 <Route path="/paygraph" element={<PayGraph />} />
                 <Route path="/mypage" element={<MyPage />} />
+                <Route path="/mypage/edit" element={<MyInfoEdit />} />
             </Routes>
         </BrowserRouter>
     );
