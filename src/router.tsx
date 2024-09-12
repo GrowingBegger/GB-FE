@@ -5,6 +5,7 @@ import { Home } from "./Pages/Home";
 import { SignupPage } from "./Pages/signup";
 import { OnboardingPage } from "./Pages/OnBoarding";
 import { BoardDetail } from "./Pages/BoardDetail";
+import { PayGraph } from "./Pages/PayGraph";
 
 function router() {
     return (
@@ -16,6 +17,7 @@ function router() {
                 <Route path="/Signup" element={<SignupPage />} />
                 <Route path="/Onboarding" element={<OnboardingPage />} />
                 <Route path="/board/detail" element={<BoardDetail />} />
+                <Route path="/paygraph" element={<PayGraph />} />
             </Routes>
         </BrowserRouter>
     );
