@@ -2,10 +2,11 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles/GlobalStyle.style";
 import { LoginPage } from "./Pages/Login";
 import { Home } from "./Pages/Home";
-import { SignupPage } from "./Pages/Signup";
+import { SignupPage } from "./Pages/signup";
 import { OnboardingPage } from "./Pages/OnBoarding";
 import { BoardDetail } from "./Pages/BoardDetail";
 import { PayGraph } from "./Pages/PayGraph";
+import { MyPage } from "./Pages/MyPage";
 
 function router() {
     return (
@@ -18,6 +19,7 @@ function router() {
                 <Route path="/Onboarding" element={<OnboardingPage />} />
                 <Route path="/board/detail" element={<BoardDetail />} />
                 <Route path="/paygraph" element={<PayGraph />} />
+                <Route path="/mypage" element={<MyPage />} />
             </Routes>
         </BrowserRouter>
     );
