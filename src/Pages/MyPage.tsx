@@ -5,6 +5,8 @@ import { Color } from "../styles/Color";
 import { Menu } from "../Components/MyPage/Menu";
 import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
 import { Link } from "react-router-dom";
+import { Modal } from "../Components/Common/Modal";
+import { useState } from "react";
 
 export const MyPage = () => {
     return (
