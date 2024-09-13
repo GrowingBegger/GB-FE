@@ -8,6 +8,7 @@ import { BoardDetail } from "./Pages/BoardDetail";
 import { PayGraph } from "./Pages/PayGraph";
 import { MyPage } from "./Pages/MyPage";
 import { MyInfoEdit } from "./Pages/MyInfoEdit";
+import { MyLevel } from "./Pages/MyLevel";
 
 function router() {
     return (
@@ -22,6 +23,7 @@ function router() {
                 <Route path="/paygraph" element={<PayGraph />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/mypage/edit" element={<MyInfoEdit />} />
+                <Route path="/mypage/level" element={<MyLevel />} />
             </Routes>
         </BrowserRouter>
     );
