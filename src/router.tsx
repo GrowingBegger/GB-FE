@@ -9,27 +9,29 @@ import { PayGraph } from "./Pages/PayGraph";
 import { MyPage } from "./Pages/MyPage";
 import { MyInfoEdit } from "./Pages/MyInfoEdit";
 import { CreatePost } from "./Pages/CreatePost";
+import { ExpenditureDetails } from "./Pages/ExpenditureDetails";
 import { MyLevel } from "./Pages/MyLevel";
 import { MyBoards } from "./Pages/MyBoards";
 
 function router() {
-    return (
-        <BrowserRouter>
-            <GlobalStyle />
-            <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/Signup" element={<SignupPage />} />
-                <Route path="/Onboarding" element={<OnboardingPage />} />
-                <Route path="/board/detail" element={<BoardDetail />} />
-                <Route path="/paygraph" element={<PayGraph />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/mypage/edit" element={<MyInfoEdit />} />
-                <Route path="/mypage/level" element={<MyLevel />} />
-                <Route path="/createPost" element={<CreatePost />} />
-                <Route path="/mypage/board" element={<MyBoards />} />
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Signup" element={<SignupPage />} />
+        <Route path="/Onboarding" element={<OnboardingPage />} />
+        <Route path="/board/detail" element={<BoardDetail />} />
+        <Route path="/paygraph" element={<PayGraph />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/edit" element={<MyInfoEdit />} />
+        <Route path="/createPost" element={<CreatePost />} />
+        <Route path="/ExpenditureDetails" element={<ExpenditureDetails />} />
+        <Route path="/mypage/level" element={<MyLevel />} />
+        <Route path="/mypage/board" element={<MyBoards />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 export default router;
