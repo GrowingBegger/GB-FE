@@ -31,7 +31,7 @@ export const MyInfoEdit = () => {
     );
 };
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,19 +40,19 @@ const Wrapper = styled.div`
     width: 100%;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
 `;
 
-const BackButton = styled.img`
+export const BackButton = styled.img`
     display: flex;
     width: 100%;
 `;
 
-const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -60,12 +60,12 @@ const TitleWrapper = styled.div`
     align-self: flex-start;
 `;
 
-const Title = styled.p`
+export const Title = styled.p`
     font-family: Pretendard-SemiBold;
     font-size: 23px;
 `;
 
-const IconWrapper = styled.div`
+export const IconWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 13px;

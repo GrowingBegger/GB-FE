@@ -33,7 +33,7 @@ export const Menu = () => {
                         <img src={LevelIcon} alt="레벨 조회" />
                         <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>레벨 조회</p>
                     </TitleWrapper>
-                    <ButtonWrapper to={"/paygraph"}>
+                    <ButtonWrapper to={"/mypage/level"}>
                         <ButtonName>내 레벨을 확인해보세요</ButtonName>
                         <img src={RightIcon} alt="바로가기" />
                     </ButtonWrapper>
