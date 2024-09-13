@@ -10,6 +10,7 @@ import { MyPage } from "./Pages/MyPage";
 import { MyInfoEdit } from "./Pages/MyInfoEdit";
 import { CreatePost } from "./Pages/CreatePost";
 import { MyLevel } from "./Pages/MyLevel";
+import { MyBoards } from "./Pages/MyBoards";
 
 function router() {
     return (
@@ -26,6 +27,7 @@ function router() {
                 <Route path="/mypage/edit" element={<MyInfoEdit />} />
                 <Route path="/mypage/level" element={<MyLevel />} />
                 <Route path="/createPost" element={<CreatePost />} />
+                <Route path="/mypage/board" element={<MyBoards />} />
             </Routes>
         </BrowserRouter>
     );

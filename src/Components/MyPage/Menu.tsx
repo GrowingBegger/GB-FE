@@ -63,7 +63,7 @@ export const Menu = () => {
                         <img src={BoardIcon} alt="내가 쓴 게시물" />
                         <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>내가 쓴 게시물</p>
                     </TitleWrapper>
-                    <ButtonWrapper to={"/paygraph"}>
+                    <ButtonWrapper to={"/mypage/board"}>
                         <ButtonName>내 게시물을 모아보세요</ButtonName>
                         <img src={RightIcon} alt="바로가기" />
                     </ButtonWrapper>
