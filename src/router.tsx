@@ -9,6 +9,7 @@ import { PayGraph } from "./Pages/PayGraph";
 import { MyPage } from "./Pages/MyPage";
 import { MyInfoEdit } from "./Pages/MyInfoEdit";
 import { CreatePost } from "./Pages/CreatePost";
+import { ExpenditureDetails } from "./Pages/ExpenditureDetails";
 
 function router() {
   return (
@@ -24,6 +25,7 @@ function router() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/edit" element={<MyInfoEdit />} />
         <Route path="/createPost" element={<CreatePost />} />
+        <Route path="/ExpenditureDetails" element={<ExpenditureDetails />} />
       </Routes>
     </BrowserRouter>
   );
