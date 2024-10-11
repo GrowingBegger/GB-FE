@@ -2,19 +2,24 @@ import styled from "styled-components";
 import Logo2 from "../Assets/img/SVG/Logo2.svg";
 import Button from "../Components/Common/Button";
 import { Color } from "../styles/Color";
+import { Link } from "react-router-dom";
 
 export const OnboardingPage = () => {
   return (
     <Container>
       <img src={Logo2} alt="로고" />
       <ButtonWrapper>
-        <Button content="로그인" />
-        <Button
-          content="회원가입"
-          backgroundColor="white"
-          borderColor={Color.color2}
-          textColor={Color.color2}
-        />
+        <Link to={"/login"}>
+          <Button content="로그인" />
+        </Link>
+        <Link to={"/singup"}>
+          <Button
+            content="회원가입"
+            backgroundColor="white"
+            borderColor={Color.color2}
+            textColor={Color.color2}
+          />
+        </Link>
       </ButtonWrapper>
     </Container>
   );

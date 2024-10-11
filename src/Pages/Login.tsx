@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Color } from "../styles/Color";
 import { LoginInput } from "../Components/LoginInput";
 import Button from "../Components/Common/Button";
+import { Link } from "react-router-dom";
 
 export const LoginPage = () => {
   return (
@@ -21,7 +22,7 @@ export const LoginPage = () => {
       <Button content="로그인" />
       <Wrapper>
         <Signin>
-          아직 회원이 아니신가요?&ensp;<p>회원가입 하기</p>
+          아직 회원이 아니신가요?&ensp;<Link to={"/signup"}>회원가입 하기</Link>
         </Signin>
       </Wrapper>
     </Container>

@@ -31,7 +31,7 @@ export const FileInput = ({
     <PhotoInputWrapper>
       {logoPreview ? (
         <img
-          src={logoPreview} // 선택한 이미지의 URL을 사용
+          src={logoPreview} // 선택한 이미지의 URL 사용
           alt="로고 미리보기"
           style={{
             width: "85vw",
@@ -41,7 +41,7 @@ export const FileInput = ({
         />
       ) : (
         <img
-          src={PhotoPreview} // 기본 미리보기 이미지를 사용
+          src={PhotoPreview} // 기본 미리보기 이미지 사용
           alt="로고 미리보기"
           style={{
             width: "85vw",
