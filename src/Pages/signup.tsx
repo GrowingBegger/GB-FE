@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Color } from "../styles/Color";
 import { LoginInput } from "../Components/LoginInput";
 import Button from "../Components/Common/Button";
+import { Link } from "react-router-dom";
 
 export const SignupPage = () => {
   return (
@@ -27,7 +28,8 @@ export const SignupPage = () => {
       <Button content="회원가입" />
       <Wrapper>
         <Signin>
-          이미 회원이신가요?&ensp;<p>로그인 하기</p>
+          이미 회원이신가요?&ensp;
+          <StyledLink to="/login">로그인 하기</StyledLink>
         </Signin>
       </Wrapper>
     </Container>
@@ -70,8 +72,12 @@ const Signin = styled.p`
   font-family: Pretendard-Regular;
   font-size: 14px;
   align-self: center;
+`;
 
-  > p {
-    color: ${Color.color2};
+const StyledLink = styled(Link)`
+  color: ${Color.color2};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
   }
 `;
