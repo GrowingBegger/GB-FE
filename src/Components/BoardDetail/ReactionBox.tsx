@@ -33,10 +33,11 @@ export const ReactionBox = () => {
 
 const ReactionBoxWrapper = styled.div`
     display: flex;
-    gap: 35px;
     align-items: center;
     margin-top: 25px;
+    width: 100%;
     justify-content: center;
+    justify-content: space-between;
 `;
 
 const TextWrapper = styled.div`
