@@ -6,6 +6,7 @@ import { Color } from "../styles/Color";
 import { FileInput } from "../Components/FileInput";
 import Button from "../Components/Common/Button";
 import { Textarea } from "../Components/Textarea";
+import { Link } from "react-router-dom";
 
 export const CreatePost = () => {
   const [price, setPrice] = useState("");
@@ -22,7 +23,9 @@ export const CreatePost = () => {
   return (
     <Container>
       <div style={{ display: "flex", gap: "5vw", alignItems: "center" }}>
-        <Back src={back} />
+        <Link to={"/"}>
+          <Back src={back} />
+        </Link>
         <Title>{isFormValid ? "게시글 수정" : "게시글 작성"}</Title>
       </div>
       <InputWrapper>

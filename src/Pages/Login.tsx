@@ -22,7 +22,8 @@ export const LoginPage = () => {
       <Button content="로그인" />
       <Wrapper>
         <Signin>
-          아직 회원이 아니신가요?&ensp;<Link to={"/signup"}>회원가입 하기</Link>
+          아직 회원이 아니신가요?&ensp;
+          <StyledLink to={"/signup"}>회원가입 하기</StyledLink>
         </Signin>
       </Wrapper>
     </Container>
@@ -65,8 +66,12 @@ const Signin = styled.p`
   font-family: Pretendard-Regular;
   font-size: 14px;
   align-self: center;
+`;
 
-  > p {
-    color: ${Color.color2};
+const StyledLink = styled(Link)`
+  color: ${Color.color2};
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
   }
 `;

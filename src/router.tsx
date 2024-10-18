@@ -23,11 +23,14 @@ function router() {
         <Route path="/Signup" element={<SignupPage />} />
         <Route path="/Onboarding" element={<OnboardingPage />} />
         <Route path="/board/detail" element={<BoardDetail />} />
-        <Route path="/paygraph" element={<PayGraph />} />
+        <Route path="/mypage/paygraph" element={<PayGraph />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/edit" element={<MyInfoEdit />} />
         <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/ExpenditureDetails" element={<ExpenditureDetails />} />
+        <Route
+          path="/mypage/ExpenditureDetails"
+          element={<ExpenditureDetails />}
+        />
         <Route path="/mypage/level" element={<MyLevel />} />
         <Route path="/mypage/board" element={<MyBoards />} />
       </Routes>

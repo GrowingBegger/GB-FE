@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import back from "../Assets/img/SVG/back.svg";
 import { Color } from "../styles/Color";
+import { Link } from "react-router-dom";
 
 export const ExpenditureDetails = () => {
   const Ex = [
@@ -13,7 +14,13 @@ export const ExpenditureDetails = () => {
   ];
   return (
     <Container>
-      <img src={back} alt="뒤로가기" style={{ width: "5px", height: "13px" }} />
+      <Link to={"/mypage"}>
+        <img
+          src={back}
+          alt="뒤로가기"
+          style={{ width: "5px", height: "13px" }}
+        />
+      </Link>
       <Text>
         <Title>한달 지출 내역</Title>
         <Content>현재 총 20,000,000원을 지출했습니다.</Content>
@@ -23,8 +30,8 @@ export const ExpenditureDetails = () => {
         <BreakDownWrapper>
           {Ex.map((element, index) => (
             <BreakDown>
-              <Name>요아정</Name>
-              <Price>15,000원</Price>
+              <Name>{element.name}</Name>
+              <Price>{element.price}</Price>
             </BreakDown>
           ))}
         </BreakDownWrapper>
