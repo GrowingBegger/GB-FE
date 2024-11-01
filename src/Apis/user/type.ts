@@ -9,3 +9,10 @@ export type getUserInfoType = {
     target: number;
     profile: string;
 };
+
+export type SignupType = {
+  username: string;
+  nickname: string;
+  password: string;
+  target: string;
+};
