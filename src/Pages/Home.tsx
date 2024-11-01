@@ -24,9 +24,6 @@ export const Home = () => {
       </BoardButton>
       <BoardWrapper>
         <Board />
-        <Board />
-        <Board />
-        <Board />
       </BoardWrapper>
     </Wrapper>
   );

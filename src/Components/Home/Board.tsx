@@ -1,15 +1,31 @@
 import styled from "styled-components";
-import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
 import DeleteIcon from "../..//Assets/img/SVG/deleteIcon.svg";
 import EditIcon from "../../Assets/img/SVG/editIcon.svg";
 import { PayNotification } from "./PayNotification";
-import TestImg from "../../Assets/img/SVG/testImg.svg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../Common/Modal";
+import { GetPostListResponse } from "../../Apis/posts/type";
+import { getPostList } from "../../Apis/posts/posts";
 
 export const Board = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [postList, setPostList] = useState<GetPostListResponse[]>([]);
+
+  useEffect(() => {
+    const fetchPostList = async () => {
+      try {
+        const response = await getPostList();
+        setPostList(
+          Array.isArray(response.data) ? response.data : [response.data]
+        );
+      } catch (error) {
+        console.error("데이터 로딩 오류:", error);
+      }
+    };
+
+    fetchPostList();
+  }, []);
 
   const handleDeleteClick = () => {
     setIsModalOpen(true);
@@ -25,33 +41,35 @@ export const Board = () => {
 
   return (
     <>
-      <BoardContainer>
-        <HeaderWrapper>
-          <ProfileWrapper>
-            <ProfileImg src={ProfileIcon} alt="프로필" />
-            <ProfileBox>
-              <Name>의진</Name>
-              <Date>2024년 9월 10일</Date>
-            </ProfileBox>
-          </ProfileWrapper>
-          <IconWrapper>
-            <img src={DeleteIcon} alt="삭제" onClick={handleDeleteClick} />
-            <Link to={"/createpost"}>
-              <img src={EditIcon} alt="수정" />
-            </Link>
-          </IconWrapper>
-        </HeaderWrapper>
-        <PayNotification />
-        <Link to={"/board/detail"}>
-          <Img src={TestImg} alt="테스트 이미지" />
-        </Link>
-        <Link to={"/board/detail"}>
-          <Content>
-            아니 근데 이게 어쩔 수가 없어요.. 맛있는걸 어떡해요 😭 진짜 그만
-            써야하는뎁... ㅠ.ㅠ
-          </Content>
-        </Link>
-      </BoardContainer>
+      {postList.map((element) => (
+        <BoardContainer key={element.content}>
+          <HeaderWrapper>
+            <ProfileWrapper>
+              <ProfileImg src={element.writerImageUrl} alt="프로필" />
+              <ProfileBox>
+                <Name>{element.writerName}</Name>
+                <Date>{element.createdAt}</Date>
+              </ProfileBox>
+            </ProfileWrapper>
+            <IconWrapper>
+              <img src={DeleteIcon} alt="삭제" onClick={handleDeleteClick} />
+              <Link to={"/createpost"}>
+                <img src={EditIcon} alt="수정" />
+              </Link>
+            </IconWrapper>
+          </HeaderWrapper>
+          <PayNotification
+            title={element.title ?? ""}
+            price={element.price ?? 0}
+          />
+          <Link to={"/board/detail"}>
+            <Img src={element.imageUrl} alt="테스트 이미지" />
+          </Link>
+          <Link to={"/board/detail"}>
+            <Content>{element.content}</Content>
+          </Link>
+        </BoardContainer>
+      ))}
 
       {isModalOpen && (
         <Modal
