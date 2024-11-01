@@ -4,8 +4,26 @@ import EditIcon from "../Assets/img/SVG/myPageIcons/orangeEditIcon.svg";
 import { LoginInput } from "../Components/LoginInput";
 import Button from "../Components/Common/Button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { editUserInfoType } from "../Apis/user/type";
+import { editUserInfo } from "../Apis/user/user";
 
 export const MyInfoEdit = () => {
+    const [nickname, setNickname] = useState("");
+    const [target, setTarget] = useState("");
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const data: editUserInfoType = {
+            nickname,
+            target: Number(target),
+        };
+        try {
+            await editUserInfo(data);
+        } catch (error) {
+            console.error("수정 중 오류 발생");
+        }
+    };
     return (
         <Wrapper>
             <Container>
@@ -20,13 +38,25 @@ export const MyInfoEdit = () => {
                     </IconWrapper>
                 </TitleWrapper>
             </Container>
-            <InputWrapper>
-                <LoginInput placeholder="닉네임을 입력해 주세요" />
-                <LoginInput type="text" placeholder="한달 목표 소비 금액을 입력해 주세요." isUnit />
-            </InputWrapper>
-            <ButtonWrapper>
-                <Button content="수정하기" />
-            </ButtonWrapper>
+            <Form onSubmit={handleSubmit}>
+                <InputWrapper>
+                    <LoginInput
+                        placeholder="닉네임을 입력해 주세요"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)}
+                    />
+                    <LoginInput
+                        type="text"
+                        placeholder="한달 목표 소비 금액을 입력해 주세요."
+                        isUnit
+                        value={target}
+                        onChange={(e) => setTarget(e.target.value)}
+                    />
+                </InputWrapper>
+                <ButtonWrapper>
+                    <Button content="수정하기" />
+                </ButtonWrapper>
+            </Form>
         </Wrapper>
     );
 };
@@ -83,4 +113,10 @@ const InputWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
     margin-top: 334px;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;

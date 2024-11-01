@@ -11,8 +11,13 @@ export type getUserInfoType = {
 };
 
 export type SignupType = {
-  username: string;
-  nickname: string;
-  password: string;
-  target: string;
+    username: string;
+    nickname: string;
+    password: string;
+    target: string;
+};
+
+export type editUserInfoType = {
+    nickname: string;
+    target: number;
 };
