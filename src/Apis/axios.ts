@@ -8,7 +8,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (res) => {
-    const token = Cookie.get("access_token");
+    const token = Cookie.get("accessToken");
     if (token) res.headers.Authorization = `Bearer ${token}`;
     return res;
   },

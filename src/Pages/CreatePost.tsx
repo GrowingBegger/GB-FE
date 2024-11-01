@@ -7,9 +7,10 @@ import { FileInput } from "../Components/FileInput";
 import Button from "../Components/Common/Button";
 import { Textarea } from "../Components/Textarea";
 import { Link } from "react-router-dom";
+import { createPost } from "../Apis/posts/posts";
 
 export const CreatePost = () => {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [itemName, setItemName] = useState("");
   const [content, setContent] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -18,6 +19,14 @@ export const CreatePost = () => {
 
   const handleFileUpload = (isUploaded: boolean) => {
     setFileUploaded(isUploaded);
+  };
+
+  const handleCreatePost = () => {
+    createPost({
+      title: itemName,
+      content: content,
+      price: price,
+    });
   };
 
   return (
@@ -43,8 +52,8 @@ export const CreatePost = () => {
           </Text>
           <LoginInput
             placeholder=""
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={price.toString()}
+            onChange={(e) => setPrice(Number(e.target.value))}
             isUnit={true}
           />
         </Input>
@@ -73,6 +82,7 @@ export const CreatePost = () => {
         backgroundColor={isFormValid ? "orange" : "gray"}
         content="게시하기"
         disabled={!isFormValid}
+        onClick={handleCreatePost}
       />
     </Container>
   );
