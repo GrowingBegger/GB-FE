@@ -49,7 +49,7 @@ export const MyPage = () => {
             <Level>Lv.{myInfos?.userRank}</Level>
             <ContentWrapper>
                 <TargetMoney>
-                    의진님의 한달 목표 소비 금액은
+                    {myInfos?.nickname}님의 한달 목표 소비 금액은
                     <p style={{ fontFamily: "Pretendard-Bold" }}>{myInfos?.target}원</p>
                     입니다
                 </TargetMoney>
