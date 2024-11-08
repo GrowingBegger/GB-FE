@@ -5,13 +5,35 @@ import { Color } from "../styles/Color";
 import { Menu } from "../Components/MyPage/Menu";
 import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getUserInfo } from "../Apis/user/user";
 import { getUserInfoType } from "../Apis/user/type";
+import { patchProfilePicture } from "../Apis/user/user";
 
 export const MyPage = () => {
     const [myInfos, setMyInfos] = useState<getUserInfoType | null>(null);
     const [imageLoaded, setImageLoaded] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleProfileClick = () => {
+        if (fileInputRef.current !== null) {
+            fileInputRef?.current.click();
+        }
+    };
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            try {
+                await patchProfilePicture(file);
+                const updatedUserInfo = await getUserInfo();
+                setMyInfos(updatedUserInfo.data);
+                setImageLoaded(true);
+            } catch (error) {
+                console.error("프로필 업데이트 오류:", error);
+            }
+        }
+    };
 
     useEffect(() => {
         getUserInfo()
@@ -38,7 +60,11 @@ export const MyPage = () => {
                 <Link to={"/"}>
                     <BackButtton src={LeftIcon} alt="뒤로가기" />
                 </Link>
-                <ProfileImg src={imageLoaded ? myInfos?.profile : ProfileIcon} alt="프로필" />
+                <ProfileImg
+                    backgroundImage={imageLoaded ? myInfos?.profile || ProfileIcon : ProfileIcon}
+                    onClick={handleProfileClick}
+                />
+                <input type="file" style={{ display: "none" }} ref={fileInputRef} onChange={handleFileChange} />
             </HeaderWrapper>
             <NameWrapper>
                 <p style={{ fontFamily: "Pretendard-SemiBold", fontSize: "17px" }}>{myInfos?.nickname}</p>
@@ -82,9 +108,14 @@ const BackButtton = styled.img`
     transform: translateY(-50%);
 `;
 
-const ProfileImg = styled.img`
+const ProfileImg = styled.div<{ backgroundImage: string }>`
     width: 70px;
+    height: 70px;
     margin-bottom: 20px;
+    background-image: url(${(props) => props.backgroundImage});
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
 `;
 
 const NameWrapper = styled.div`
