@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "../Common/Modal";
 import { GetPostListResponse } from "../../Apis/posts/type";
 import { getPostList } from "../../Apis/posts/posts";
+import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
 
 export const Board = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +46,10 @@ export const Board = () => {
         <BoardContainer key={element.content}>
           <HeaderWrapper>
             <ProfileWrapper>
-              <ProfileImg src={element.writerImageUrl} alt="프로필" />
+              <ProfileImg
+                src={element.writerImageUrl || ProfileIcon}
+                alt="프로필"
+              />
               <ProfileBox>
                 <Name>{element.writerName}</Name>
                 <Date>{element.createdAt}</Date>
