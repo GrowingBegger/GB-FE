@@ -6,18 +6,50 @@ import { Color } from "../styles/Color";
 import { FileInput } from "../Components/FileInput";
 import Button from "../Components/Common/Button";
 import { Textarea } from "../Components/Textarea";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { createPost, FileUpload } from "../Apis/posts/posts";
 
 export const CreatePost = () => {
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [itemName, setItemName] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState<File | null>(null);
   const [fileUploaded, setFileUploaded] = useState(false);
+  const navigate = useNavigate();
 
-  const isFormValid = price && itemName && content && fileUploaded;
+  const isFormValid =
+    price > 0 &&
+    itemName.trim() !== "" &&
+    content.trim() !== "" &&
+    fileUploaded;
 
-  const handleFileUpload = (isUploaded: boolean) => {
-    setFileUploaded(isUploaded);
+  const handleFileUpload = (file: File | null) => {
+    if (file) {
+      setImage(file);
+      setFileUploaded(true);
+    } else {
+      setImage(null);
+      setFileUploaded(false);
+    }
+  };
+
+  const handleCreatePost = async () => {
+    try {
+      const response = await createPost({
+        title: itemName,
+        content: content,
+        price: price,
+      });
+
+      const postId = response.data.id;
+      if (image) {
+        await FileUpload(postId, image);
+      }
+      console.log("게시글이 성공적으로 작성되었습니다!");
+      navigate("/");
+    } catch (error) {
+      console.error("게시물 생성 오류:", error);
+    }
   };
 
   return (
@@ -43,8 +75,11 @@ export const CreatePost = () => {
           </Text>
           <LoginInput
             placeholder=""
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={price.toString()}
+            onChange={(e) => {
+              const numericValue = parseInt(e.target.value, 10);
+              setPrice(isNaN(numericValue) ? 0 : numericValue);
+            }}
             isUnit={true}
           />
         </Input>
@@ -66,13 +101,14 @@ export const CreatePost = () => {
           </Text>
           <Textarea
             onValueChange={(hasValue) => setContent(hasValue ? "valid" : "")}
-          />{" "}
+          />
         </Input>
       </InputWrapper>
       <Button
         backgroundColor={isFormValid ? "orange" : "gray"}
         content="게시하기"
         disabled={!isFormValid}
+        onClick={handleCreatePost}
       />
     </Container>
   );

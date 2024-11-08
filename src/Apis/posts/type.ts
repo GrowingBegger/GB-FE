@@ -14,3 +14,7 @@ export type GetPostListResponse = {
   writerName: string;
   writerImageUrl: string;
 };
+
+export type CreatePostResponse = {
+  id: number;
+};
