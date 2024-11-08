@@ -52,7 +52,7 @@ export const Board = () => {
               />
               <ProfileBox>
                 <Name>{element.writerName}</Name>
-                <Date>{element.createdAt}</Date>
+                <Date>{element.createdAt.split("T")[0]}</Date>    
               </ProfileBox>
             </ProfileWrapper>
             <IconWrapper>
