@@ -1,4 +1,3 @@
-import { Cookie } from "../../Utils/cookie";
 import { instance } from "../axios";
 import { LoginType, getUserInfoType, SignupType, editUserInfoType } from "./type";
 
@@ -16,4 +15,10 @@ export const signup = async (data: SignupType) => {
 
 export const editUserInfo = async (data: editUserInfoType) => {
     return await instance.patch("/user/info", data);
+};
+
+export const patchProfilePicture = async (file: File) => {
+    const formData = new FormData();
+    formData.append("profile", file);
+    return await instance.patch("/user/img", formData);
 };
