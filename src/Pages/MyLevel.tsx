@@ -8,8 +8,23 @@ import { TitleWrapper } from "./MyInfoEdit";
 import { Title } from "./MyInfoEdit";
 import LevelIcon from "../Assets/img/SVG/levelIcons/grayLevelIcon.svg";
 import { Level } from "../Components/MyPage/Level";
+import { getUserInfo } from "../Apis/user/user";
+import { getUserInfoType } from "../Apis/user/type";
+import { useEffect, useState } from "react";
 
 export const MyLevel = () => {
+    const [myLevel, setMyLevel] = useState<getUserInfoType | null>(null);
+
+    useEffect(() => {
+        getUserInfo()
+            .then((response) => {
+                setMyLevel(response.data);
+            })
+            .catch((error) => {
+                console.error("레벨 조회 오류:", error);
+            });
+    }, []);
+
     return (
         <Wrapper>
             <Container>
@@ -24,7 +39,7 @@ export const MyLevel = () => {
                     </IconWrapper>
                 </TitleWrapper>
             </Container>
-            <Level level={1} />
+            {myLevel && <Level level={myLevel.userRank} />}
         </Wrapper>
     );
 };
