@@ -19,10 +19,6 @@ export type GetPostListResponse = {
   writerImageUrl: string;
 };
 
-export type CreatePostResponse = {
-  id: number;
-};
-
 export type GetPostDetailResponse = {
   post: {
     id: number;
