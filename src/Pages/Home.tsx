@@ -44,9 +44,9 @@ export const Home = () => {
       </BoardButton>
       <BoardWrapper>
         {postList.map((post: any) => (
-          <Link key={post.postId} to={`/posts/${post.postId}`}>
+          <>
             <Board postId={post.postId} />
-          </Link>
+          </>
         ))}
         <Board />
       </BoardWrapper>

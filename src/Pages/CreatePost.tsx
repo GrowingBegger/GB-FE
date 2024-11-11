@@ -100,7 +100,8 @@ export const CreatePost = () => {
             <Star>*</Star>
           </Text>
           <Textarea
-            onValueChange={(hasValue) => setContent(hasValue ? "valid" : "")}
+            value={content}
+            onValueChange={(value) => setContent(value)}
           />
         </Input>
       </InputWrapper>
