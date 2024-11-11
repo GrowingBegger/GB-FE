@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DeleteIcon from "../..//Assets/img/SVG/deleteIcon.svg";
+import DeleteIcon from "../../Assets/img/SVG/deleteIcon.svg";
 import EditIcon from "../../Assets/img/SVG/editIcon.svg";
 import { PayNotification } from "./PayNotification";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { GetPostListResponse } from "../../Apis/posts/type";
 import { getPostList } from "../../Apis/posts/posts";
 import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
 
-export const Board = () => {
+export const Board = ({ postId }: { postId?: any }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [postList, setPostList] = useState<GetPostListResponse[]>([]);
 
@@ -28,60 +28,50 @@ export const Board = () => {
     fetchPostList();
   }, []);
 
-  const handleDeleteClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleConfirm = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <>
-      {postList.map((element) => (
-        <BoardContainer key={element.content}>
-          <HeaderWrapper>
-            <ProfileWrapper>
-              <ProfileImg
-                src={element.writerImageUrl || ProfileIcon}
-                alt="프로필"
-              />
-              <ProfileBox>
-                <Name>{element.writerName}</Name>
-                <Date>{element.createdAt.split("T")[0]}</Date>    
-              </ProfileBox>
-            </ProfileWrapper>
-            <IconWrapper>
-              <img src={DeleteIcon} alt="삭제" onClick={handleDeleteClick} />
-              <Link to={"/createpost"}>
-                <img src={EditIcon} alt="수정" />
-              </Link>
-            </IconWrapper>
-          </HeaderWrapper>
-          <PayNotification
-            title={element.title ?? ""}
-            price={element.price ?? 0}
-          />
-          <Link to={"/board/detail"}>
-            <Img src={element.imageUrl} alt="테스트 이미지" />
-          </Link>
-          <Link to={"/board/detail"}>
-            <Content>{element.content}</Content>
-          </Link>
-        </BoardContainer>
-      ))}
-
+      {postList
+        .filter((post) => !postId || post.postId === postId)
+        .map((element) => (
+          <BoardContainer key={element.postId}>
+            <HeaderWrapper>
+              <ProfileWrapper>
+                <ProfileImg src={element.writerImageUrl} alt="프로필" />
+                <ProfileBox>
+                  <Name>{element.writerName}</Name>
+                  <Date>{element.createdAt.split("T")[0]}</Date>
+                </ProfileBox>
+              </ProfileWrapper>
+              <IconWrapper>
+                <img
+                  src={DeleteIcon}
+                  alt="삭제"
+                  onClick={() => setIsModalOpen(true)}
+                />
+                <Link to={"/createpost"}>
+                  <img src={EditIcon} alt="수정" />
+                </Link>
+              </IconWrapper>
+            </HeaderWrapper>
+            <PayNotification
+              title={element.title ?? ""}
+              price={element.price ?? 0}
+            />
+            <Link to={`/posts/${element.postId}`}>
+              <Img src={element.imageUrl} alt="게시물 이미지" />
+            </Link>
+            <Link to={`/posts/${element.postId}`}>
+              <Content>{element.content}</Content>
+            </Link>
+          </BoardContainer>
+        ))}
       {isModalOpen && (
         <Modal
           titleText={{ before: "게시물을", after: "하시겠습니까?" }}
           pointText="삭제"
           contentText="작성한 게시물이 삭제됩니다"
-          onCancel={handleCancel}
-          onConfirm={handleConfirm}
+          onCancel={() => setIsModalOpen(false)}
+          onConfirm={() => setIsModalOpen(false)}
         />
       )}
     </>

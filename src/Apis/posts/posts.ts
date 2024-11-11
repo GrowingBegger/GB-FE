@@ -1,8 +1,9 @@
 import { instance } from "../axios";
 import {
   CreatePostRequest,
-  CreatePostResponse,
   GetPostListResponse,
+  CreatePostResponse,
+  GetPostDetailResponse,
 } from "./type";
 
 const router = "/posts";
@@ -18,5 +19,9 @@ export const FileUpload = async (postId: number, image: File) => {
 };
 
 export const getPostList = async () => {
-  return await instance.get<GetPostListResponse>(`${router}`);
+  return await instance.get<GetPostListResponse[]>(`${router}`);
+};
+
+export const PostDetail = async (postId: number) => {
+  return await instance.get<GetPostDetailResponse>(`${router}/${postId}`);
 };

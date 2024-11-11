@@ -22,7 +22,7 @@ function router() {
         <Route path="/" element={<Home />} />
         <Route path="/Signup" element={<SignupPage />} />
         <Route path="/Onboarding" element={<OnboardingPage />} />
-        <Route path="/board/detail" element={<BoardDetail />} />
+        <Route path="/posts/:postId" element={<BoardDetail />} />
         <Route path="/mypage/paygraph" element={<PayGraph />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/edit" element={<MyInfoEdit />} />
