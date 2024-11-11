@@ -25,3 +25,7 @@ export const getPostList = async () => {
 export const PostDetail = async (postId: number) => {
   return await instance.get<GetPostDetailResponse>(`${router}/${postId}`);
 };
+
+export const postDelete = async (postId: number) => {
+  return await instance.delete(`${router}/${postId}`);
+};

@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Modal } from "../Common/Modal";
 import { GetPostListResponse } from "../../Apis/posts/type";
-import { getPostList } from "../../Apis/posts/posts";
-import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
+import { getPostList, postDelete } from "../../Apis/posts/posts";
 
 export const Board = ({ postId }: { postId?: any }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,6 +26,18 @@ export const Board = ({ postId }: { postId?: any }) => {
 
     fetchPostList();
   }, []);
+
+  const handleConfirm = () => {
+    postDelete(postId)
+      .then(() => {
+        console.log("게시글이 삭제 되었습니다.");
+        setIsModalOpen(false);
+        window.location.reload();
+      })
+      .catch(() => {
+        console.log("게시글 삭제 오류");
+      });
+  };
 
   return (
     <>
@@ -71,7 +82,7 @@ export const Board = ({ postId }: { postId?: any }) => {
           pointText="삭제"
           contentText="작성한 게시물이 삭제됩니다"
           onCancel={() => setIsModalOpen(false)}
-          onConfirm={() => setIsModalOpen(false)}
+          onConfirm={handleConfirm}
         />
       )}
     </>
