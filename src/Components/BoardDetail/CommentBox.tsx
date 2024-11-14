@@ -21,7 +21,7 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
           <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>
             {comment.user.nickname}
           </p>
-          <Date>{comment.created_at}</Date>
+          <Date>{comment.created_at.split("T")[0]}</Date>
         </ProfileWrap>
       </ProfileWrapper>
       <Comment>{comment.content}</Comment>
