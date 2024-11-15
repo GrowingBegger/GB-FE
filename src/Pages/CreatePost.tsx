@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LoginInput } from "../Components/LoginInput";
 import back from "../Assets/img/SVG/back.svg";
@@ -6,22 +6,53 @@ import { Color } from "../styles/Color";
 import { FileInput } from "../Components/FileInput";
 import Button from "../Components/Common/Button";
 import { Textarea } from "../Components/Textarea";
-import { Link, useNavigate } from "react-router-dom";
-import { createPost, FileUpload } from "../Apis/posts/posts";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  createPost,
+  FileUpload,
+  PostDetail,
+  postUpdate,
+} from "../Apis/posts/posts";
 
 export const CreatePost = () => {
+  const { postId } = useParams<{ postId: string }>();
+  const numericPostId = postId ? parseInt(postId, 10) : null;
   const [price, setPrice] = useState(0);
   const [itemName, setItemName] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [fileUploaded, setFileUploaded] = useState(false);
+  const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const navigate = useNavigate();
+  const isEditMode = Boolean(numericPostId);
 
   const isFormValid =
     price > 0 &&
+    itemName &&
     itemName.trim() !== "" &&
+    content &&
     content.trim() !== "" &&
     fileUploaded;
+
+  useEffect(() => {
+    if (isEditMode && numericPostId !== null) {
+      const fetchPostData = async () => {
+        try {
+          const response = await PostDetail(numericPostId);
+          const post = response.data.post;
+          console.log(response.data.post.content);
+
+          setItemName(post.title);
+          setContent(post.content);
+          setPrice(post.price);
+          setExistingImageUrl(post.image_url || null);
+        } catch (error) {
+          console.error("게시글 로딩 오류:", error);
+        }
+      };
+      fetchPostData();
+    }
+  }, [isEditMode, numericPostId]);
 
   const handleFileUpload = (file: File | null) => {
     if (file) {
@@ -33,17 +64,28 @@ export const CreatePost = () => {
     }
   };
 
-  const handleCreatePost = async () => {
+  const handleSubmit = async () => {
     try {
-      const response = await createPost({
-        title: itemName,
-        content: content,
-        price: price,
-      });
-
-      const postId = response.data.id;
-      if (image) {
-        await FileUpload(postId, image);
+      if (isEditMode && numericPostId !== null) {
+        await postUpdate(numericPostId, {
+          title: itemName,
+          content: content,
+          price: price,
+        });
+        if (image) {
+          await FileUpload(numericPostId, image);
+        }
+        console.log("게시글이 성공적으로 수정되었습니다!");
+        navigate(-1);
+      } else {
+        await createPost({
+          title: itemName,
+          content: content,
+          price: price,
+        });
+        if (image && numericPostId !== null) {
+          await FileUpload(numericPostId, image);
+        }
       }
       console.log("게시글이 성공적으로 작성되었습니다!");
       navigate("/");
@@ -58,7 +100,7 @@ export const CreatePost = () => {
         <Link to={"/"}>
           <Back src={back} />
         </Link>
-        <Title>{isFormValid ? "게시글 수정" : "게시글 작성"}</Title>
+        <Title>{isEditMode ? "게시글 수정" : "게시글 작성"}</Title>
       </div>
       <InputWrapper>
         <Input>
@@ -66,7 +108,10 @@ export const CreatePost = () => {
             <Name>사진</Name>
             <Star>*</Star>
           </Text>
-          <FileInput onFileUpload={handleFileUpload} />
+          <FileInput
+            onFileUpload={handleFileUpload}
+            existingImageUrl={existingImageUrl}
+          />
         </Input>
         <Input>
           <Text>
@@ -109,7 +154,7 @@ export const CreatePost = () => {
         backgroundColor={isFormValid ? "orange" : "gray"}
         content="게시하기"
         disabled={!isFormValid}
-        onClick={handleCreatePost}
+        onClick={handleSubmit}
       />
     </Container>
   );

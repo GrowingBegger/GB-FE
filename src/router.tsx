@@ -14,24 +14,28 @@ import { MyLevel } from "./Pages/MyLevel";
 import { MyBoards } from "./Pages/MyBoards";
 
 function router() {
-    return (
-        <BrowserRouter>
-            <GlobalStyle />
-            <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/Signup" element={<SignupPage />} />
-                <Route path="/Onboarding" element={<OnboardingPage />} />
-                <Route path="/posts/:postId" element={<BoardDetail />} />
-                <Route path="/mypage/paygraph" element={<PayGraph />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/mypage/edit" element={<MyInfoEdit />} />
-                <Route path="/createPost" element={<CreatePost />} />
-                <Route path="/mypage/ExpenditureDetails" element={<ExpenditureDetails />} />
-                <Route path="/mypage/level" element={<MyLevel />} />
-                <Route path="/mypage/board" element={<MyBoards />} />
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Signup" element={<SignupPage />} />
+        <Route path="/Onboarding" element={<OnboardingPage />} />
+        <Route path="/posts/:postId" element={<BoardDetail />} />
+        <Route path="/mypage/paygraph" element={<PayGraph />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/edit" element={<MyInfoEdit />} />
+        <Route path="/createPost/:postId" element={<CreatePost />} />
+        <Route path="/createPost" element={<CreatePost />} />
+        <Route
+          path="/mypage/ExpenditureDetails"
+          element={<ExpenditureDetails />}
+        />
+        <Route path="/mypage/level" element={<MyLevel />} />
+        <Route path="/mypage/board" element={<MyBoards />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 export default router;

@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import PhotoPreview from "../Assets/img/PNG/photoPreview.png";
 
+interface FileInputProps {
+  onFileUpload: (file: File | null) => void;
+  existingImageUrl?: string | null;
+}
+
 export const FileInput = ({
   onFileUpload,
-}: {
-  onFileUpload: (file: File | null) => void;
-}) => {
+  existingImageUrl,
+}: FileInputProps) => {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (existingImageUrl) {
+      setLogoPreview(existingImageUrl);
+    }
+  }, [existingImageUrl]);
+
+  console.log(existingImageUrl);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];

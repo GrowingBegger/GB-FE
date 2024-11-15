@@ -13,18 +13,20 @@ interface CommentBoxProps {
 }
 
 export const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
-    return (
-        <Wrapper>
-            <ProfileWrapper>
-                <Profile src={comment.user.profile || ProfileIcon} alt="프로필" />
-                <ProfileWrap>
-                    <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>{comment.user.nickname}</p>
-                    <Date>{comment.createdAt}</Date>
-                </ProfileWrap>
-            </ProfileWrapper>
-            <Comment>{comment.content}</Comment>
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <ProfileWrapper>
+        <Profile src={comment.user.profile || ProfileIcon} alt="프로필" />
+        <ProfileWrap>
+          <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>
+            {comment.user.nickname}
+          </p>
+          <Date>{comment.created_at.split("T")[0]}</Date>
+        </ProfileWrap>
+      </ProfileWrapper>
+      <Comment>{comment.content}</Comment>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

@@ -3,29 +3,14 @@ import DeleteIcon from "../../Assets/img/SVG/deleteIcon.svg";
 import EditIcon from "../../Assets/img/SVG/editIcon.svg";
 import { PayNotification } from "./PayNotification";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "../Common/Modal";
-import { GetPostListResponse } from "../../Apis/posts/type";
-import { getPostList, postDelete } from "../../Apis/posts/posts";
+import { Value } from "../../Apis/posts/type";
+import { postDelete } from "../../Apis/posts/posts";
 
-export const Board = ({ postId }: { postId?: any }) => {
+export const Board = ({ value }: { value: Value }) => {
+  const postId = value.postId;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [postList, setPostList] = useState<GetPostListResponse[]>([]);
-
-  useEffect(() => {
-    const fetchPostList = async () => {
-      try {
-        const response = await getPostList();
-        setPostList(
-          Array.isArray(response.data) ? response.data : [response.data]
-        );
-      } catch (error) {
-        console.error("데이터 로딩 오류:", error);
-      }
-    };
-
-    fetchPostList();
-  }, []);
 
   const handleConfirm = () => {
     postDelete(postId)
@@ -41,41 +26,34 @@ export const Board = ({ postId }: { postId?: any }) => {
 
   return (
     <>
-      {postList
-        .filter((post) => !postId || post.postId === postId)
-        .map((element) => (
-          <BoardContainer key={element.postId}>
-            <HeaderWrapper>
-              <ProfileWrapper>
-                <ProfileImg src={element.writerImageUrl} alt="프로필" />
-                <ProfileBox>
-                  <Name>{element.writerName}</Name>
-                  <Date>{element.createdAt.split("T")[0]}</Date>
-                </ProfileBox>
-              </ProfileWrapper>
-              <IconWrapper>
-                <img
-                  src={DeleteIcon}
-                  alt="삭제"
-                  onClick={() => setIsModalOpen(true)}
-                />
-                <Link to={"/createpost"}>
-                  <img src={EditIcon} alt="수정" />
-                </Link>
-              </IconWrapper>
-            </HeaderWrapper>
-            <PayNotification
-              title={element.title ?? ""}
-              price={element.price ?? 0}
+      <BoardContainer key={value.postId}>
+        <HeaderWrapper>
+          <ProfileWrapper>
+            <ProfileImg src={value.writerImageUrl} alt="프로필" />
+            <ProfileBox>
+              <Name>{value.writerName}</Name>
+              <Date>{value.createdAt.split("T")[0]}</Date>
+            </ProfileBox>
+          </ProfileWrapper>
+          <IconWrapper>
+            <img
+              src={DeleteIcon}
+              alt="삭제"
+              onClick={() => setIsModalOpen(true)}
             />
-            <Link to={`/posts/${element.postId}`}>
-              <Img src={element.imageUrl} alt="게시물 이미지" />
+            <Link to={`/createpost/${value.postId}`}>
+              <img src={EditIcon} alt="수정" />
             </Link>
-            <Link to={`/posts/${element.postId}`}>
-              <Content>{element.content}</Content>
-            </Link>
-          </BoardContainer>
-        ))}
+          </IconWrapper>
+        </HeaderWrapper>
+        <PayNotification title={value.title ?? ""} price={value.price ?? 0} />
+        <Link to={`/posts/${value.postId}`}>
+          <Img src={value.imageUrl} alt="게시물 이미지" />
+        </Link>
+        <Link to={`/posts/${value.postId}`}>
+          <Content>{value.content}</Content>
+        </Link>
+      </BoardContainer>
       {isModalOpen && (
         <Modal
           titleText={{ before: "게시물을", after: "하시겠습니까?" }}

@@ -7,7 +7,7 @@ import { CommentBox } from "../Components/BoardDetail/CommentBox";
 import { Color } from "../styles/Color";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GetPostDetailResponse } from "../Apis/posts/type";
+import { GetPostDetailResponse, Value } from "../Apis/posts/type";
 import { PostDetail } from "../Apis/posts/posts";
 import { createComment } from "../Apis/comments/comments";
 
@@ -42,36 +42,45 @@ export const BoardDetail = () => {
             console.error("댓글 전송 오류: ", error);
         }
     };
+  
+  const transformPostToValue = (post: GetPostDetailResponse): Value => ({
+    postId: post.post.id,
+    title: post.post.title,
+    content: post.post.content,
+    price: post.post.price,
+    imageUrl: post.post.image_url,
+    writerName: post.post.user.nickname,
+    writerImageUrl: post.post.user.profile,
+    createdAt: post.post.created_at,
+  });
 
-    return (
-        <Wrapper>
-            <Wrap>
-                <Link to={"/"}>
-                    <BackButtonWrapper>
-                        <img src={LeftIcon} alt="뒤로가기" />
-                        <p style={{ fontFamily: "Pretendard-Regular", fontSize: "13px" }}>뒤로가기</p>
-                    </BackButtonWrapper>
-                </Link>
-            </Wrap>
-            {post && <Board postId={post.post.id} />}
-            {post && <ReactionBox likes={post.likes} />}
-            <Line />
-            <CommentTitle>댓글</CommentTitle>
-            <CommentWrapper>
-                {post?.comment.map((comment, index) => (
-                    <CommentBox key={index} comment={comment} />
-                ))}
-            </CommentWrapper>
-            <CommentInputWrapper>
-                <CommentInput
-                    value={commentContent}
-                    onChange={(e) => setCommentContent(e.target.value)}
-                    placeholder="댓글을 입력해주세요"
-                ></CommentInput>
-                <img src={SendIcon} alt="보내기" onClick={handleSendComment} />
-            </CommentInputWrapper>
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <Wrap>
+        <Link to={"/"}>
+          <BackButtonWrapper>
+            <img src={LeftIcon} alt="뒤로가기" />
+            <p style={{ fontFamily: "Pretendard-Regular", fontSize: "13px" }}>
+              뒤로가기
+            </p>
+          </BackButtonWrapper>
+        </Link>
+      </Wrap>
+      {post && <Board value={transformPostToValue(post)} />}
+      {post && <ReactionBox likes={post.likes} />}
+      <Line />
+      <CommentTitle>댓글</CommentTitle>
+      <CommentWrapper>
+        {post?.comment.map((comment, index) => (
+          <CommentBox key={index} comment={comment} />
+        ))}
+      </CommentWrapper>
+      <CommentInputWrapper>
+        <CommentInput placeholder="댓글을 입력해주세요"></CommentInput>
+        <img src={SendIcon} alt="보내기" />
+      </CommentInputWrapper>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
