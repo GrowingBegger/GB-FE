@@ -7,7 +7,7 @@ import { CommentBox } from "../Components/BoardDetail/CommentBox";
 import { Color } from "../styles/Color";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GetPostDetailResponse } from "../Apis/posts/type";
+import { GetPostDetailResponse, Value } from "../Apis/posts/type";
 import { PostDetail } from "../Apis/posts/posts";
 
 export const BoardDetail = () => {
@@ -29,6 +29,17 @@ export const BoardDetail = () => {
     fetchPostDetail();
   }, [postId]);
 
+  const transformPostToValue = (post: GetPostDetailResponse): Value => ({
+    postId: post.post.id,
+    title: post.post.title,
+    content: post.post.content,
+    price: post.post.price,
+    imageUrl: post.post.image_url,
+    writerName: post.post.user.nickname,
+    writerImageUrl: post.post.user.profile,
+    createdAt: post.post.created_at,
+  });
+
   return (
     <Wrapper>
       <Wrap>
@@ -41,7 +52,7 @@ export const BoardDetail = () => {
           </BackButtonWrapper>
         </Link>
       </Wrap>
-      {/* {post && <Board postId={post.post.id} />} */}
+      {post && <Board value={transformPostToValue(post)} />}
       {post && <ReactionBox likes={post.likes} />}
       <Line />
       <CommentTitle>댓글</CommentTitle>

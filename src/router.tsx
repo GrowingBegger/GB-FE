@@ -26,6 +26,7 @@ function router() {
         <Route path="/mypage/paygraph" element={<PayGraph />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/edit" element={<MyInfoEdit />} />
+        <Route path="/createPost/:postId" element={<CreatePost />} />
         <Route path="/createPost" element={<CreatePost />} />
         <Route
           path="/mypage/ExpenditureDetails"

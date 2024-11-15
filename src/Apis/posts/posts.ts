@@ -29,3 +29,7 @@ export const PostDetail = async (postId: number) => {
 export const postDelete = async (postId: number) => {
   return await instance.delete(`${router}/${postId}`);
 };
+
+export const postUpdate = async (postId: number, data: CreatePostRequest) => {
+  return await instance.patch(`${router}/${postId}`, data);
+};

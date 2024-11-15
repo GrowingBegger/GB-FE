@@ -41,7 +41,7 @@ export const Board = ({ value }: { value: Value }) => {
               alt="삭제"
               onClick={() => setIsModalOpen(true)}
             />
-            <Link to={"/createpost"}>
+            <Link to={`/createpost/${value.postId}`}>
               <img src={EditIcon} alt="수정" />
             </Link>
           </IconWrapper>
