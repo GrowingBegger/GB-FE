@@ -41,7 +41,7 @@ export const BoardDetail = () => {
           </BackButtonWrapper>
         </Link>
       </Wrap>
-      {post && <Board postId={post.post.id} />}
+      {/* {post && <Board postId={post.post.id} />} */}
       {post && <ReactionBox likes={post.likes} />}
       <Line />
       <CommentTitle>댓글</CommentTitle>

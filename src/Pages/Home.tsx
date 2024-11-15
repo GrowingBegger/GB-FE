@@ -9,16 +9,14 @@ import { GetPostListResponse } from "../Apis/posts/type";
 import { getPostList } from "../Apis/posts/posts";
 
 export const Home = () => {
-  const [postList, setPostList] = useState<GetPostListResponse[]>([]);
+  const [postList, setPostList] = useState<GetPostListResponse | null>(null);
 
   useEffect(() => {
     const fetchPostList = async () => {
       try {
         const response = await getPostList();
-        const uniquePosts = Array.from(
-          new Map(response.data.map((post) => [post.postId, post])).values()
-        );
-        setPostList(uniquePosts);
+        console.log("API 응답 데이터:", response.data);
+        setPostList(response.data);
       } catch (error) {
         console.error("데이터 로딩 오류:", error);
       }
@@ -26,6 +24,7 @@ export const Home = () => {
 
     fetchPostList();
   }, []);
+
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -43,12 +42,9 @@ export const Home = () => {
         </Link>
       </BoardButton>
       <BoardWrapper>
-        {postList.map((post: any) => (
-          <>
-            <Board postId={post.postId} />
-          </>
+        {postList?.map((post) => (
+          <Board key={post.postId} value={post} />
         ))}
-        <Board />
       </BoardWrapper>
     </Wrapper>
   );

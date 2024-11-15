@@ -19,7 +19,7 @@ export const FileUpload = async (postId: number, image: File) => {
 };
 
 export const getPostList = async () => {
-  return await instance.get<GetPostListResponse[]>(`${router}`);
+  return await instance.get<GetPostListResponse>(`${router}`);
 };
 
 export const PostDetail = async (postId: number) => {

@@ -8,7 +8,9 @@ export type CreatePostResponse = {
   id: number;
 };
 
-export type GetPostListResponse = {
+export type GetPostListResponse = Value[];
+
+export type Value = {
   postId: number;
   title: string;
   price: number;
