@@ -7,6 +7,6 @@ export const createReaction = async (postId: number, data: createReactionRequest
     return await instance.post(`${router}/${postId}`, data);
 };
 
-export const deleteReaction = async (likeId: number) => {
-    return await instance.delete(`${router}/${likeId}`);
+export const deleteReaction = async (postId: number) => {
+    return await instance.delete(`${router}/${postId}`);
 };

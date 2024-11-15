@@ -3,7 +3,8 @@ import MadIcon from "../../Assets/img/SVG/reactionIcons/madIcon.svg";
 import RegretIcon from "../../Assets/img/SVG/reactionIcons/regretIcon.svg";
 import GoodIcon from "../../Assets/img/SVG/reactionIcons/goodIcon.svg";
 import { ReactionType, createReactionRequest } from "../../Apis/likes/type";
-import { createReaction } from "../../Apis/likes/likes";
+import { createReaction, deleteReaction } from "../../Apis/likes/likes";
+import { useState } from "react";
 
 type ReactionBoxProps = {
     likes: [number, number, number];
@@ -11,14 +12,23 @@ type ReactionBoxProps = {
 };
 
 export const ReactionBox = ({ likes, postId }: ReactionBoxProps) => {
+    const [selectedReaction, setSelectedReaction] = useState<ReactionType | null>(null);
+
     const handleReactionClick = async (reaction: ReactionType) => {
         try {
-            const data: createReactionRequest = { reaction };
-            await createReaction(postId, data);
+            if (selectedReaction === reaction) {
+                await deleteReaction(postId);
+                setSelectedReaction(null);
+            } else {
+                const data: createReactionRequest = { reaction };
+                await createReaction(postId, data);
+                setSelectedReaction(reaction);
+            }
         } catch (error) {
-            console.error("반응 생성 오류:", error);
+            console.error("반응 처리 오류:", error);
         }
     };
+
     return (
         <ReactionBoxWrapper>
             <Reactions onClick={() => handleReactionClick("Bad")}>
