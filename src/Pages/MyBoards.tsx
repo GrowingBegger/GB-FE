@@ -2,8 +2,25 @@ import styled from "styled-components";
 import { Board } from "../Components/Home/Board";
 import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GetPostListResponse } from "../Apis/posts/type";
+import { getMyPostList } from "../Apis/posts/posts";
 
 export const MyBoards = () => {
+  const [myList, setMyList] = useState<GetPostListResponse | null>(null);
+
+  useEffect(() => {
+    const myPostList = async () => {
+      try {
+        const response = await getMyPostList();
+        setMyList(response.data);
+      } catch (error) {
+        console.error("데이터 로딩 오류:", error);
+      }
+    };
+    myPostList();
+  }, []);
+
   return (
     <Wrapper>
       <div style={{ display: "flex", gap: "5vw", alignItems: "center" }}>
@@ -15,11 +32,9 @@ export const MyBoards = () => {
         </p>
       </div>
       <BoardWrapper>
-        {/* <Board />
-                <Board />
-                <Board />
-                <Board />
-                <Board /> */}
+        {myList?.map((element) => (
+          <Board key={element.postId} value={element} />
+        ))}
       </BoardWrapper>
     </Wrapper>
   );

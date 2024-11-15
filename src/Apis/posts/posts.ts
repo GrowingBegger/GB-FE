@@ -22,6 +22,10 @@ export const getPostList = async () => {
   return await instance.get<GetPostListResponse>(`${router}`);
 };
 
+export const getMyPostList = async () => {
+  return await instance.get<GetPostListResponse>(`${router}/my`);
+};
+
 export const PostDetail = async (postId: number) => {
   return await instance.get<GetPostDetailResponse>(`${router}/${postId}`);
 };
