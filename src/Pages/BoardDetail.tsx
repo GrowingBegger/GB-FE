@@ -5,9 +5,44 @@ import { Board } from "../Components/Home/Board";
 import { ReactionBox } from "../Components/BoardDetail/ReactionBox";
 import { CommentBox } from "../Components/BoardDetail/CommentBox";
 import { Color } from "../styles/Color";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GetPostDetailResponse } from "../Apis/posts/type";
+import { PostDetail } from "../Apis/posts/posts";
+import { createComment } from "../Apis/comments/comments";
 
 export const BoardDetail = () => {
+    const { postId } = useParams<{ postId: string }>();
+    const [post, setPost] = useState<GetPostDetailResponse | null>(null);
+    console.log(postId);
+    const [commentContent, setCommentContent] = useState("");
+
+    useEffect(() => {
+        const fetchPostDetail = async () => {
+            if (!postId) return;
+            try {
+                const response = await PostDetail(Number(postId));
+                setPost(response.data);
+            } catch (error) {
+                console.error("데이터 로딩 오류:", error);
+            }
+        };
+
+        fetchPostDetail();
+    }, [postId]);
+
+    const handleSendComment = async () => {
+        if (!commentContent.trim()) return;
+        try {
+            await createComment(Number(postId), commentContent);
+            setCommentContent("");
+            const response = await PostDetail(Number(postId));
+            setPost(response.data);
+        } catch (error) {
+            console.error("댓글 전송 오류: ", error);
+        }
+    };
+
     return (
         <Wrapper>
             <Wrap>
@@ -18,19 +53,22 @@ export const BoardDetail = () => {
                     </BackButtonWrapper>
                 </Link>
             </Wrap>
-            <Board />
-            <ReactionBox />
+            {post && <Board postId={post.post.id} />}
+            {post && <ReactionBox likes={post.likes} />}
             <Line />
             <CommentTitle>댓글</CommentTitle>
             <CommentWrapper>
-                <CommentBox />
-                <CommentBox />
-                <CommentBox />
-                <CommentBox />
+                {post?.comment.map((comment, index) => (
+                    <CommentBox key={index} comment={comment} />
+                ))}
             </CommentWrapper>
             <CommentInputWrapper>
-                <CommentInput placeholder="댓글을 입력해주세요"></CommentInput>
-                <img src={SendIcon} alt="보내기" />
+                <CommentInput
+                    value={commentContent}
+                    onChange={(e) => setCommentContent(e.target.value)}
+                    placeholder="댓글을 입력해주세요"
+                ></CommentInput>
+                <img src={SendIcon} alt="보내기" onClick={handleSendComment} />
             </CommentInputWrapper>
         </Wrapper>
     );

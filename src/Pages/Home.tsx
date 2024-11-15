@@ -4,8 +4,28 @@ import styled from "styled-components";
 import RightIcon from "../Assets/img/SVG/rightIcon.svg";
 import { Board } from "../Components/Home/Board";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GetPostListResponse } from "../Apis/posts/type";
+import { getPostList } from "../Apis/posts/posts";
 
 export const Home = () => {
+  const [postList, setPostList] = useState<GetPostListResponse[]>([]);
+
+  useEffect(() => {
+    const fetchPostList = async () => {
+      try {
+        const response = await getPostList();
+        const uniquePosts = Array.from(
+          new Map(response.data.map((post) => [post.postId, post])).values()
+        );
+        setPostList(uniquePosts);
+      } catch (error) {
+        console.error("데이터 로딩 오류:", error);
+      }
+    };
+
+    fetchPostList();
+  }, []);
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -23,6 +43,11 @@ export const Home = () => {
         </Link>
       </BoardButton>
       <BoardWrapper>
+        {postList.map((post: any) => (
+          <>
+            <Board postId={post.postId} />
+          </>
+        ))}
         <Board />
       </BoardWrapper>
     </Wrapper>

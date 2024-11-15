@@ -5,7 +5,7 @@ import PhotoPreview from "../Assets/img/PNG/photoPreview.png";
 export const FileInput = ({
   onFileUpload,
 }: {
-  onFileUpload: (isUploaded: boolean) => void;
+  onFileUpload: (file: File | null) => void;
 }) => {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
@@ -17,13 +17,13 @@ export const FileInput = ({
 
       reader.onloadend = () => {
         setLogoPreview(reader.result as string);
-        onFileUpload(true);
+        onFileUpload(selectedFile);
       };
 
       reader.readAsDataURL(selectedFile);
     } else {
       setLogoPreview(null);
-      onFileUpload(false);
+      onFileUpload(null);
     }
   };
 
@@ -31,7 +31,7 @@ export const FileInput = ({
     <PhotoInputWrapper>
       {logoPreview ? (
         <img
-          src={logoPreview} // 선택한 이미지의 URL 사용
+          src={logoPreview}
           alt="로고 미리보기"
           style={{
             width: "85vw",
@@ -41,7 +41,7 @@ export const FileInput = ({
         />
       ) : (
         <img
-          src={PhotoPreview} // 기본 미리보기 이미지 사용
+          src={PhotoPreview}
           alt="로고 미리보기"
           style={{
             width: "85vw",

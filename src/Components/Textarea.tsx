@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Color } from "../styles/Color";
 
 interface TextareaProps {
-  onValueChange: (hasValue: boolean) => void;
+  value: string;
+  onValueChange: (value: string) => void;
 }
 
-export const Textarea: React.FC<TextareaProps> = ({ onValueChange }) => {
-  const [value, setValue] = useState("");
+export const Textarea: React.FC<TextareaProps> = ({ value, onValueChange }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
 
   const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const v = event.target.value;
-    setValue(v);
-    onValueChange(v.trim().length > 0);
+    onValueChange(v);
   };
 
   useEffect(() => {
@@ -23,6 +22,7 @@ export const Textarea: React.FC<TextareaProps> = ({ onValueChange }) => {
       ref.current.style.height = scrollHeight + "px";
     }
   }, [value]);
+
   return (
     <TextArea
       placeholder="ex)하지만 맛있는거지"

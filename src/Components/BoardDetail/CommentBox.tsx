@@ -1,17 +1,28 @@
 import styled from "styled-components";
 import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
 
-export const CommentBox = () => {
+interface CommentBoxProps {
+    comment: {
+        content: string;
+        createdAt: string;
+        user: {
+            nickname: string;
+            profile: string;
+        };
+    };
+}
+
+export const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
     return (
         <Wrapper>
             <ProfileWrapper>
-                <Profile src={ProfileIcon} alt="프로필" />
+                <Profile src={comment.user.profile || ProfileIcon} alt="프로필" />
                 <ProfileWrap>
-                    <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>보노보노</p>
-                    <Date>2024년 9월 11일</Date>
+                    <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>{comment.user.nickname}</p>
+                    <Date>{comment.createdAt}</Date>
                 </ProfileWrap>
             </ProfileWrapper>
-            <Comment>여러분 그거 아세요? 사실 보노보노 섹시함ㅋㅋ</Comment>
+            <Comment>{comment.content}</Comment>
         </Wrapper>
     );
 };
