@@ -4,7 +4,7 @@ import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
 interface CommentBoxProps {
   comment: {
     content: string;
-    createdAt: string;
+    created_at: string;
     user: {
       nickname: string;
       profile: string;
@@ -21,7 +21,7 @@ export const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
           <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>
             {comment.user.nickname}
           </p>
-          <Date>{comment.createdAt.split("T")[0]}</Date>
+          <Date>{comment.created_at.split("T")[0]}</Date>
         </ProfileWrap>
       </ProfileWrapper>
       <Comment>{comment.content}</Comment>

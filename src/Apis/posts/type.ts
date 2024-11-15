@@ -37,7 +37,7 @@ export type GetPostDetailResponse = {
   likes: [number, number, number];
   comment: {
     content: string;
-    createdAt: string;
+    created_at: string;
     user: {
       nickname: string;
       profile: string;
