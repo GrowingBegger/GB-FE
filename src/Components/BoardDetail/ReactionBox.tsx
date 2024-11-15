@@ -24,6 +24,7 @@ export const ReactionBox = ({ likes, postId }: ReactionBoxProps) => {
                 await createReaction(postId, data);
                 setSelectedReaction(reaction);
             }
+            window.location.reload();
         } catch (error) {
             console.error("반응 처리 오류:", error);
         }
