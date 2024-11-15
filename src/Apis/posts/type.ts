@@ -1,11 +1,11 @@
 export type CreatePostRequest = {
-  title: string;
-  content: string;
-  price: number;
+    title: string;
+    content: string;
+    price: number;
 };
 
 export type CreatePostResponse = {
-  id: number;
+    id: number;
 };
 
 export type GetPostListResponse = Value[];
@@ -22,25 +22,25 @@ export type Value = {
 };
 
 export type GetPostDetailResponse = {
-  post: {
-    id: number;
-    title: string;
-    content: string;
-    image_url: string;
-    price: number;
-    created_at: string;
-    user: {
-      nickname: string;
-      profile: string;
+    post: {
+        id: number;
+        title: string;
+        content: string;
+        image_url: string;
+        price: number;
+        created_at: string;
+        user: {
+            nickname: string;
+            profile: string;
+        };
     };
-  };
-  likes: [number, number, number];
-  comment: {
-    content: string;
-    created_at: string;
-    user: {
-      nickname: string;
-      profile: string;
-    };
-  }[];
+    likes: [number, number, number];
+    comment: {
+        content: string;
+        createdAt: string;
+        user: {
+            nickname: string;
+            profile: string;
+        };
+    }[];
 };

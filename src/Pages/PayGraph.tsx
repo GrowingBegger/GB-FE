@@ -3,8 +3,23 @@ import LeftIcon from "../Assets/img/SVG/leftIcon.svg";
 import { Color } from "../styles/Color";
 import { Graph } from "../Components/MyPage/Graph";
 import { Link } from "react-router-dom";
+import { getExpenses } from "../Apis/expenses/expenses";
+import { useEffect, useState } from "react";
+import { getExpensesType } from "../Apis/expenses/type";
 
 export const PayGraph = () => {
+    const [myExpenses, setMyExpenses] = useState<getExpensesType>();
+
+    useEffect(() => {
+        getExpenses()
+            .then((response) => {
+                setMyExpenses(response.data);
+            })
+            .catch((error) => {
+                console.error("올해 지출 내역 불러오기 오류: ", error);
+            });
+    }, []);
+
     return (
         <Wrapper>
             <BackButtonLink to={"/mypage"}>
@@ -18,54 +33,12 @@ export const PayGraph = () => {
                 <Graph />
             </GraphBox>
             <PayDataWrapper>
-                <PayData>
-                    <Month>1월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>2월</Month>
-                    <Money>0 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>3월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <ThisMonth>4월</ThisMonth>
-                    <ThisMoney>10,000,000 원</ThisMoney>
-                </PayData>
-                <PayData>
-                    <Month>5월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>6월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>7월</Month>
-                    <Money>200,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>5월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>6월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>7월</Month>
-                    <Money>200,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>6월</Month>
-                    <Money>10,000,000 원</Money>
-                </PayData>
-                <PayData>
-                    <Month>7월</Month>
-                    <Money>200,000 원</Money>
-                </PayData>
+                {myExpenses?.expenseData.map((data) => (
+                    <PayData key={data.month}>
+                        <Month>{`${data.month}월`}</Month>
+                        <Money>{`${data.expense.toLocaleString()} 원`}</Money>
+                    </PayData>
+                ))}
             </PayDataWrapper>
         </Wrapper>
     );
