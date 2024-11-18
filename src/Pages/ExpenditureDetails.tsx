@@ -22,7 +22,7 @@ export const ExpenditureDetails = () => {
                 }, 0);
                 setTotalExpenses(total);
             } catch (error) {
-                console.error("Error fetching expenses:", error);
+                console.error("한달 지출 내역 오류:", error);
             }
         };
         fetchExpenses();
