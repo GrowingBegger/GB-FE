@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Modal } from "../Common/Modal";
 import { Value } from "../../Apis/posts/type";
 import { postDelete } from "../../Apis/posts/posts";
+import { Cookie } from "../../Utils/cookie";
 
 export const Board = ({ value }: { value: Value }) => {
     const postId = value.postId;
@@ -24,43 +25,53 @@ export const Board = ({ value }: { value: Value }) => {
             });
     };
 
-    return (
-        <>
-            <BoardContainer key={value.postId}>
-                <HeaderWrapper>
-                    <ProfileWrapper>
-                        <ProfileImg backgroundImage={value.writerImageUrl} />
-                        <ProfileBox>
-                            <Name>{value.writerName}</Name>
-                            <Date>{value.createdAt.split("T")[0]}</Date>
-                        </ProfileBox>
-                    </ProfileWrapper>
-                    <IconWrapper>
-                        <img src={DeleteIcon} alt="삭제" onClick={() => setIsModalOpen(true)} />
-                        <Link to={`/createpost/${value.postId}`}>
-                            <img src={EditIcon} alt="수정" />
-                        </Link>
-                    </IconWrapper>
-                </HeaderWrapper>
-                <PayNotification title={value.title ?? ""} price={value.price ?? 0} />
-                <Link to={`/posts/${value.postId}`}>
-                    <Img src={value.imageUrl} alt="게시물 이미지" />
-                </Link>
-                <Link to={`/posts/${value.postId}`}>
-                    <Content>{value.content}</Content>
-                </Link>
-            </BoardContainer>
-            {isModalOpen && (
-                <Modal
-                    titleText={{ before: "게시물을", after: "하시겠습니까?" }}
-                    pointText="삭제"
-                    contentText="작성한 게시물이 삭제됩니다"
-                    onCancel={() => setIsModalOpen(false)}
-                    onConfirm={handleConfirm}
-                />
-            )}
-        </>
-    );
+  const encodedNickname = Cookie.get("nickname");
+
+  const decodedNickname = decodeURIComponent(encodedNickname);
+
+  return (
+    <>
+      <BoardContainer key={value.postId}>
+        <HeaderWrapper>
+          <ProfileWrapper>
+            <ProfileImg src={value.writerImageUrl} alt="프로필" />
+            <ProfileBox>
+              <Name>{value.writerName}</Name>
+              <Date>{value.createdAt.split("T")[0]}</Date>
+            </ProfileBox>
+          </ProfileWrapper>
+          {decodedNickname === value.writerName && (
+            <IconWrapper>
+              <img
+                src={DeleteIcon}
+                alt="삭제"
+                onClick={() => setIsModalOpen(true)}
+              />
+              <Link to={`/createpost/${value.postId}`}>
+                <img src={EditIcon} alt="수정" />
+              </Link>
+            </IconWrapper>
+          )}
+        </HeaderWrapper>
+        <PayNotification title={value.title ?? ""} price={value.price ?? 0} />
+        <Link to={`/posts/${value.postId}`}>
+          <Img src={value.imageUrl} alt="게시물 이미지" />
+        </Link>
+        <Link to={`/posts/${value.postId}`}>
+          <Content>{value.content}</Content>
+        </Link>
+      </BoardContainer>
+      {isModalOpen && (
+        <Modal
+          titleText={{ before: "게시물을", after: "하시겠습니까?" }}
+          pointText="삭제"
+          contentText="작성한 게시물이 삭제됩니다"
+          onCancel={() => setIsModalOpen(false)}
+          onConfirm={handleConfirm}
+        />
+      )}
+    </>
+  );
 };
 
 const BoardContainer = styled.div`
