@@ -7,9 +7,12 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetPostListResponse } from "../Apis/posts/type";
 import { getPostList } from "../Apis/posts/posts";
+import { getUserInfoType } from "../Apis/user/type";
+import { getUserInfo } from "../Apis/user/user";
 
 export const Home = () => {
   const [postList, setPostList] = useState<GetPostListResponse | null>(null);
+  const [myProfile, setMyProfile] = useState<getUserInfoType | null>(null);
 
   useEffect(() => {
     const fetchPostList = async () => {
@@ -25,12 +28,22 @@ export const Home = () => {
     fetchPostList();
   }, []);
 
+  useEffect(() => {
+    getUserInfo()
+      .then((response) => {
+        setMyProfile(response.data);
+      })
+      .catch((error) => {
+        console.error("데이터 로딩 오류", error);
+      });
+  }, []);
+
   return (
     <Wrapper>
       <HeaderWrapper>
         <LogoImg src={Logo} alt="로고" />
         <Link to={"/mypage"}>
-          <ProfileImg src={ProfileIcon} alt="프로필" />
+          <ProfileImg backgroundImage={myProfile?.profile || ProfileIcon} />
         </Link>
       </HeaderWrapper>
       <BoardButton>
@@ -82,9 +95,15 @@ const ButtonImg = styled.img`
   margin-left: auto;
 `;
 
-const ProfileImg = styled.img`
+const ProfileImg = styled.div<{ backgroundImage: string }>`
   display: flex;
   margin-left: auto;
+  width: 30px;
+  height: 30px;
+  background-image: url(${(props) => props.backgroundImage});
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
 `;
 
 const HeaderWrapper = styled.div`
