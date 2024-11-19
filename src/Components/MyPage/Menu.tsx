@@ -25,6 +25,7 @@ export const Menu = () => {
 
     const handleConfirm = () => {
         Cookie.remove("accessToken");
+        Cookie.remove("nickname");
         navigate("/login");
     };
 
