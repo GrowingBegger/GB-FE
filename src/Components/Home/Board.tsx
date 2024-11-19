@@ -69,7 +69,7 @@ export const Board = ({ value }: { value: Value }) => {
 
 const BoardContainer = styled.div`
   width: 100%;
-  height: 401px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.1);
