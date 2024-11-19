@@ -89,7 +89,7 @@ export const CreatePost = () => {
         }
       }
       console.log("게시글이 성공적으로 작성되었습니다!");
-      navigate("/");
+      navigate("/main");
     } catch (error) {
       console.error("게시물 생성 오류:", error);
     }
@@ -98,7 +98,7 @@ export const CreatePost = () => {
   return (
     <Container>
       <div style={{ display: "flex", gap: "5vw", alignItems: "center" }}>
-        <Link to={"/"}>
+        <Link to={"/main"}>
           <Back src={back} />
         </Link>
         <Title>{isEditMode ? "게시글 수정" : "게시글 작성"}</Title>

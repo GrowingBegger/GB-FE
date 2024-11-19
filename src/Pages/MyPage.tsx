@@ -57,7 +57,7 @@ export const MyPage = () => {
     return (
         <Wrapper>
             <HeaderWrapper>
-                <Link to={"/"}>
+                <Link to={"/main"}>
                     <BackButtton src={LeftIcon} alt="뒤로가기" />
                 </Link>
                 <ProfileImg
