@@ -74,8 +74,12 @@ export const BoardDetail = () => {
                 ))}
             </CommentWrapper>
             <CommentInputWrapper>
-                <CommentInput placeholder="댓글을 입력해주세요"></CommentInput>
-                <img src={SendIcon} alt="보내기" />
+                <CommentInput
+                    value={commentContent}
+                    onChange={(e) => setCommentContent(e.target.value)}
+                    placeholder="댓글을 입력해주세요"
+                ></CommentInput>
+                <img src={SendIcon} alt="보내기" onClick={handleSendComment} />
             </CommentInputWrapper>
         </Wrapper>
     );
