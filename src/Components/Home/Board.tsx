@@ -3,15 +3,17 @@ import DeleteIcon from "../../Assets/img/SVG/deleteIcon.svg";
 import EditIcon from "../../Assets/img/SVG/editIcon.svg";
 import { PayNotification } from "./PayNotification";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal } from "../Common/Modal";
 import { Value } from "../../Apis/posts/type";
 import { postDelete } from "../../Apis/posts/posts";
 import { Cookie } from "../../Utils/cookie";
+import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
 
 export const Board = ({ value }: { value: Value }) => {
     const postId = value.postId;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleConfirm = () => {
         postDelete(postId)
@@ -24,6 +26,14 @@ export const Board = ({ value }: { value: Value }) => {
                 console.log("게시글 삭제 오류");
             });
     };
+    useEffect(() => {
+        if (value?.writerImageUrl) {
+            const img = new Image();
+            img.src = value.writerImageUrl;
+            img.onload = () => setImageLoaded(true);
+            img.onerror = () => setImageLoaded(false);
+        }
+    });
 
     const encodedNickname = Cookie.get("nickname");
 
@@ -34,7 +44,9 @@ export const Board = ({ value }: { value: Value }) => {
             <BoardContainer key={value.postId}>
                 <HeaderWrapper>
                     <ProfileWrapper>
-                        <ProfileImg backgroundImage={value.writerImageUrl} />
+                        <ProfileImg
+                            backgroundImage={imageLoaded ? value?.writerImageUrl || ProfileIcon : ProfileIcon}
+                        />
                         <ProfileBox>
                             <Name>{value.writerName}</Name>
                             <Date>{value.createdAt.split("T")[0]}</Date>

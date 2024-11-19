@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ProfileIcon from "../../Assets/img/SVG/profileIcon.svg";
+import { useEffect, useState } from "react";
 
 interface CommentBoxProps {
     comment: {
@@ -13,10 +14,20 @@ interface CommentBoxProps {
 }
 
 export const CommentBox: React.FC<CommentBoxProps> = ({ comment }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+    useEffect(() => {
+        if (comment.user?.profile) {
+            const img = new Image();
+            img.src = comment.user?.profile;
+            img.onload = () => setImageLoaded(true);
+            img.onerror = () => setImageLoaded(false);
+        }
+    });
+
     return (
         <Wrapper>
             <ProfileWrapper>
-                <Profile backgroundImage={comment.user.profile || ProfileIcon} />
+                <Profile backgroundImage={imageLoaded ? comment.user?.profile || ProfileIcon : ProfileIcon} />
                 <ProfileWrap>
                     <p style={{ fontFamily: "Pretendard-Medium", fontSize: "15px" }}>{comment.user.nickname}</p>
                     <Date>{comment.created_at.split("T")[0]}</Date>
