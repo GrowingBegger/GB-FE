@@ -7,23 +7,34 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { editUserInfoType } from "../Apis/user/type";
 import { editUserInfo } from "../Apis/user/user";
+import { useNavigate } from "react-router-dom";
 
 export const MyInfoEdit = () => {
     const [nickname, setNickname] = useState("");
     const [target, setTarget] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+
+        if (nickname.trim() === "" || target.trim() === "") {
+            alert("모든 입력 필드를 채워주세요");
+            return;
+        }
         const data: editUserInfoType = {
             nickname,
             target: Number(target),
         };
         try {
             await editUserInfo(data);
+            navigate("/mypage");
         } catch (error) {
             console.error("수정 중 오류 발생");
         }
     };
+
+    // const isDisabled = nickname.trim() === "" || target.trim() === "";
+
     return (
         <Wrapper>
             <Container>
