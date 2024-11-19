@@ -78,13 +78,14 @@ export const CreatePost = () => {
         console.log("게시글이 성공적으로 수정되었습니다!");
         navigate(-1);
       } else {
-        await createPost({
+        const response = await createPost({
           title: itemName,
           content: content,
           price: price,
         });
-        if (image && numericPostId !== null) {
-          await FileUpload(numericPostId, image);
+        const newPostId = response.data.id;
+        if (image && newPostId) {
+          await FileUpload(newPostId, image);
         }
       }
       console.log("게시글이 성공적으로 작성되었습니다!");

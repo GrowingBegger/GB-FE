@@ -11,15 +11,15 @@ export const FileInput = ({
   onFileUpload,
   existingImageUrl,
 }: FileInputProps) => {
-  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string | null>(
+    existingImageUrl || null
+  );
 
   useEffect(() => {
     if (existingImageUrl) {
       setLogoPreview(existingImageUrl);
     }
   }, [existingImageUrl]);
-
-  console.log(existingImageUrl);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -34,7 +34,7 @@ export const FileInput = ({
 
       reader.readAsDataURL(selectedFile);
     } else {
-      setLogoPreview(null);
+      setLogoPreview(existingImageUrl || null);
       onFileUpload(null);
     }
   };
